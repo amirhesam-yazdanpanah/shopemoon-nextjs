@@ -23,45 +23,81 @@ body {
   }
 }
 
-.brand-marquee-row {
+.marquee-row {
   overflow: hidden;
   width: 100%;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
 
-.brand-marquee-track {
+.marquee-track {
   display: flex;
   align-items: center;
   width: max-content;
-  gap: 1rem;
-  padding-inline-end: 1rem;
+  gap: 16px;
   will-change: transform;
-  animation: brand-marquee-scroll 60s linear infinite;
 }
 
-.brand-marquee-track.brand-marquee-reverse {
-  animation-direction: reverse;
+.marquee-track-left {
+  animation: marquee-left 35s linear infinite;
 }
 
-.brand-marquee-track > a {
+.marquee-track-right {
+  animation: marquee-right 38s linear infinite;
+}
+
+.marquee-track > a {
+  position: relative;
   flex: none;
   white-space: nowrap;
 }
 
-/* track contains 3 duplicated copies of the brand list; shifting by exactly
-   one copy-width (-33.3333%) loops seamlessly forever with no jump/gap */
-@keyframes brand-marquee-scroll {
+/* the track holds 4 duplicated copies of the brand list, so moving by 50%
+   (= exactly 2 copy-widths) lands on a pixel-identical repeat: seamless,
+   infinite, no blank tail */
+@keyframes marquee-left {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-33.3333%);
+    transform: translateX(-50%);
   }
 }
 
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-track .tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: #1b2330;
+  color: #f7f1e6;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+  z-index: 20;
+}
+
+.marquee-track a:hover .tooltip,
+.marquee-track a:focus-visible .tooltip {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .brand-marquee-track {
+  .marquee-track {
     animation: none;
   }
 }
