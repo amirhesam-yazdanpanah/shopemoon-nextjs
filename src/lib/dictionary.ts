@@ -75,6 +75,8 @@ const beautyBrands: BrandLink[] = [
   { name: "Huda Beauty", url: "https://www.hudabeauty.com" },
 ];
 
+export const allBrands: BrandLink[] = [...fashionBrands, ...sportsBrands, ...beautyBrands];
+
 export interface LocaleDictionary {
   dir: "rtl" | "ltr";
   nav: {

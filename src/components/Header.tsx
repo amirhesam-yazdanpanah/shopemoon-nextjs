@@ -20,11 +20,23 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-gold-soft/40 bg-cream/90 backdrop-blur dark:border-navy-soft dark:bg-navy-dark/90">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
-        <a
-          href="#hero"
-          className="bg-gradient-to-br from-navy to-gold bg-clip-text text-2xl font-extrabold tracking-tight text-transparent dark:from-cream dark:to-gold-light sm:text-3xl"
-        >
-          ShopeMoon
+        <a href="#hero" className="flex items-center gap-2">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            className="shrink-0 text-gold"
+          >
+            <path
+              d="M20.5 14.5c-1 .3-2.1.4-3.2.2-4-.7-7-4.2-7-8.4 0-1.5.4-2.9 1-4.1C7.1 3.5 4 7.4 4 12c0 5 4 9.5 9 9.5 4 0 7.4-2.6 8.6-6.2-.4.1-.7.2-1.1.2Z"
+              fill="currentColor"
+            />
+          </svg>
+          <span className="bg-gradient-to-br from-navy to-gold bg-clip-text text-2xl font-extrabold tracking-tight text-transparent dark:from-cream dark:to-gold-light sm:text-3xl">
+            ShopeMoon
+          </span>
         </a>
 
         <nav className="hidden items-center gap-6 text-sm font-semibold md:flex">

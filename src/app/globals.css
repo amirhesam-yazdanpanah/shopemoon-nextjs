@@ -22,3 +22,39 @@ body {
     text-wrap: balance;
   }
 }
+
+.brand-marquee {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.brand-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 2.75rem;
+  padding-inline-end: 2.75rem;
+  will-change: transform;
+  animation: brand-marquee-scroll 38s linear infinite;
+}
+
+.brand-marquee-track span {
+  flex: none;
+  white-space: nowrap;
+}
+
+@keyframes brand-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-marquee-track {
+    animation: none;
+  }
+}
