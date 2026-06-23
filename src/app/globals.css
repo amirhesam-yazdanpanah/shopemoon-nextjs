@@ -23,13 +23,11 @@ body {
   }
 }
 
-.brand-marquee {
-  overflow-x: hidden;
-  overflow-y: visible;
+.brand-marquee-row {
+  overflow: hidden;
   width: 100%;
-  padding-top: 2.5rem;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
 
 .brand-marquee-track {
@@ -39,7 +37,11 @@ body {
   gap: 1rem;
   padding-inline-end: 1rem;
   will-change: transform;
-  animation: brand-marquee-scroll 38s linear infinite;
+  animation: brand-marquee-scroll 60s linear infinite;
+}
+
+.brand-marquee-track.brand-marquee-reverse {
+  animation-direction: reverse;
 }
 
 .brand-marquee-track > a {
@@ -47,12 +49,14 @@ body {
   white-space: nowrap;
 }
 
+/* track contains 3 duplicated copies of the brand list; shifting by exactly
+   one copy-width (-33.3333%) loops seamlessly forever with no jump/gap */
 @keyframes brand-marquee-scroll {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-33.3333%);
   }
 }
 

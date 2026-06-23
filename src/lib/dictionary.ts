@@ -11,7 +11,7 @@ export interface BrandLink {
   url: string;
 }
 
-const fashionBrands: BrandLink[] = [
+export const fashionBrands: BrandLink[] = [
   // Inditex
   { name: "Zara", url: "https://www.zara.com" },
   { name: "Massimo Dutti", url: "https://www.massimodutti.com" },
@@ -40,7 +40,7 @@ const fashionBrands: BrandLink[] = [
   { name: "Chanel", url: "https://www.chanel.com" },
 ];
 
-const sportsBrands: BrandLink[] = [
+export const sportsBrands: BrandLink[] = [
   { name: "Nike", url: "https://www.nike.com" },
   { name: "Adidas", url: "https://www.adidas.com" },
   { name: "Puma", url: "https://www.puma.com" },
@@ -55,7 +55,7 @@ const sportsBrands: BrandLink[] = [
   { name: "Columbia", url: "https://www.columbia.com" },
 ];
 
-const beautyBrands: BrandLink[] = [
+export const beautyBrands: BrandLink[] = [
   { name: "Sephora", url: "https://www.sephora.com" },
   { name: "Clinique", url: "https://www.clinique.com" },
   { name: "MAC", url: "https://www.maccosmetics.com" },
