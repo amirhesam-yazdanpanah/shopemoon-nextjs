@@ -9,7 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { dictionary, type Locale } from "@/lib/dictionary";
+import { dictionary, type Locale, type LocaleDictionary } from "@/lib/dictionary";
 
 type Theme = "light" | "dark";
 
@@ -20,7 +20,7 @@ interface ThemeContextValue {
 
 interface LocaleContextValue {
   locale: Locale;
-  dict: (typeof dictionary)["fa"];
+  dict: LocaleDictionary;
   toggleLocale: () => void;
 }
 

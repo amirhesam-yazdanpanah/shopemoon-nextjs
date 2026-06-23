@@ -6,6 +6,59 @@ export function whatsappLink(message: string) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
+export interface LocaleDictionary {
+  dir: "rtl" | "ltr";
+  nav: {
+    home: string;
+    products: string;
+    membership: string;
+    faq: string;
+    contact: string;
+  };
+  hero: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    whatsappMessage: string;
+  };
+  trust: {
+    title: string;
+    items: { title: string; desc: string }[];
+  };
+  products: {
+    title: string;
+    subtitle: string;
+    categories: { name: string; brands: string[] }[];
+  };
+  membership: {
+    title: string;
+    desc: string;
+    fields: {
+      name: string;
+      whatsapp: string;
+      brands: string;
+      details: string;
+    };
+    submit: string;
+  };
+  faq: {
+    title: string;
+    items: { q: string; a: string }[];
+  };
+  contact: {
+    title: string;
+    desc: string;
+    cta: string;
+  };
+  footer: {
+    tagline: string;
+    rights: string;
+  };
+  theme: { light: string; dark: string };
+}
+
 export const dictionary = {
   fa: {
     dir: "rtl" as const,
@@ -139,4 +192,4 @@ export const dictionary = {
     },
     theme: { light: "Light", dark: "Dark" },
   },
-} satisfies Record<Locale, unknown>;
+} satisfies Record<Locale, LocaleDictionary>;
