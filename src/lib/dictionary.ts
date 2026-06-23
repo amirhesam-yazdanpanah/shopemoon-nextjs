@@ -20,6 +20,8 @@ const fashionBrands: BrandLink[] = [
   { name: "Stradivarius", url: "https://www.stradivarius.com" },
   { name: "Pull&Bear", url: "https://www.pullandbear.com" },
   { name: "Zara Home", url: "https://www.zarahome.com" },
+  { name: "Mango", url: "https://shop.mango.com" },
+  { name: "H&M", url: "https://www.hm.com" },
   // Luxury
   { name: "Gucci", url: "https://www.gucci.com" },
   { name: "Dior", url: "https://www.dior.com" },
@@ -57,7 +59,7 @@ const beautyBrands: BrandLink[] = [
   { name: "Sephora", url: "https://www.sephora.com" },
   { name: "Clinique", url: "https://www.clinique.com" },
   { name: "MAC", url: "https://www.maccosmetics.com" },
-  { name: "Kiko Milano", url: "https://www.kikocosmetics.com" },
+  { name: "KIKO Milano", url: "https://www.kikocosmetics.com" },
   { name: "Guerlain", url: "https://www.guerlain.com" },
   { name: "Chanel Beauty", url: "https://www.chanel.com/us/beauty/" },
   { name: "YSL Beauty", url: "https://www.yslbeauty.com" },

@@ -48,8 +48,7 @@ export function BrandMarquee() {
     if (track) track.style.animationPlayState = "running";
   }
 
-  const brandNames = allBrands.map((brand) => brand.name);
-  const loopedBrands = [...brandNames, ...brandNames];
+  const loopedBrands = [...allBrands, ...allBrands];
 
   return (
     <div
@@ -62,13 +61,42 @@ export function BrandMarquee() {
       onTouchEnd={handleTouchEnd}
     >
       <div ref={trackRef} className="brand-marquee-track">
-        {loopedBrands.map((name, index) => (
-          <span
-            key={`${name}-${index}`}
-            className="text-sm font-semibold uppercase tracking-widest text-navy/50 dark:text-cream/50 sm:text-base"
+        {loopedBrands.map((brand, index) => (
+          <a
+            key={`${brand.name}-${index}`}
+            href={brand.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="مشاهده وب‌سایت رسمی برند"
+            aria-label={`مشاهده وب‌سایت رسمی ${brand.name} (در تب جدید باز می‌شود)`}
+            className="group relative inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold-soft/40 bg-white/60 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-navy/70 transition duration-200 hover:-translate-y-0.5 hover:scale-105 hover:border-gold hover:bg-white hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 dark:bg-navy-soft/40 dark:text-cream/70 dark:hover:bg-navy-soft sm:text-base"
           >
-            {name}
-          </span>
+            <span
+              role="tooltip"
+              className="pointer-events-none absolute -top-9 start-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-navy px-3 py-1.5 text-xs font-medium text-cream opacity-0 shadow-soft transition duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 dark:bg-cream dark:text-navy"
+            >
+              مشاهده وب‌سایت رسمی برند
+            </span>
+
+            {brand.name}
+
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              className="shrink-0 scale-75 opacity-0 transition duration-200 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
+            >
+              <path
+                d="M7 17 17 7M9 7h8v8"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
         ))}
       </div>
     </div>

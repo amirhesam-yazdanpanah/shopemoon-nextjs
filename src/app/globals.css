@@ -24,22 +24,25 @@ body {
 }
 
 .brand-marquee {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   width: 100%;
+  padding-top: 2.5rem;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
 .brand-marquee-track {
   display: flex;
+  align-items: center;
   width: max-content;
-  gap: 2.75rem;
-  padding-inline-end: 2.75rem;
+  gap: 1rem;
+  padding-inline-end: 1rem;
   will-change: transform;
   animation: brand-marquee-scroll 38s linear infinite;
 }
 
-.brand-marquee-track span {
+.brand-marquee-track > a {
   flex: none;
   white-space: nowrap;
 }
