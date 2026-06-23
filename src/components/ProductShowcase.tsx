@@ -22,11 +22,15 @@ export function ProductShowcase() {
               <h3 className="text-lg font-bold text-gold">{cat.name}</h3>
               <ul className="mt-4 space-y-2 text-sm">
                 {cat.brands.map((brand) => (
-                  <li
-                    key={brand}
-                    className="rounded-lg bg-cream-dark px-3 py-2 font-medium dark:bg-navy-dark"
-                  >
-                    {brand}
+                  <li key={brand.name}>
+                    <a
+                      href={brand.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block rounded-lg bg-cream-dark px-3 py-2 font-medium text-navy transition hover:bg-gold-soft hover:text-navy dark:bg-navy-dark dark:text-cream dark:hover:bg-navy-soft"
+                    >
+                      {brand.name}
+                    </a>
                   </li>
                 ))}
               </ul>

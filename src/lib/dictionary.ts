@@ -6,6 +6,75 @@ export function whatsappLink(message: string) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
+export interface BrandLink {
+  name: string;
+  url: string;
+}
+
+const fashionBrands: BrandLink[] = [
+  // Inditex
+  { name: "Zara", url: "https://www.zara.com" },
+  { name: "Massimo Dutti", url: "https://www.massimodutti.com" },
+  { name: "Oysho", url: "https://www.oysho.com" },
+  { name: "Bershka", url: "https://www.bershka.com" },
+  { name: "Stradivarius", url: "https://www.stradivarius.com" },
+  { name: "Pull&Bear", url: "https://www.pullandbear.com" },
+  { name: "Zara Home", url: "https://www.zarahome.com" },
+  // Luxury
+  { name: "Gucci", url: "https://www.gucci.com" },
+  { name: "Dior", url: "https://www.dior.com" },
+  { name: "Louis Vuitton", url: "https://www.louisvuitton.com" },
+  { name: "Saint Laurent", url: "https://www.ysl.com" },
+  { name: "Prada", url: "https://www.prada.com" },
+  { name: "Balenciaga", url: "https://www.balenciaga.com" },
+  { name: "Burberry", url: "https://www.burberry.com" },
+  { name: "Fendi", url: "https://www.fendi.com" },
+  { name: "Valentino", url: "https://www.valentino.com" },
+  { name: "Versace", url: "https://www.versace.com" },
+  { name: "Bottega Veneta", url: "https://www.bottegaveneta.com" },
+  { name: "Loewe", url: "https://www.loewe.com" },
+  { name: "Celine", url: "https://www.celine.com" },
+  { name: "Hermès", url: "https://www.hermes.com" },
+  { name: "Chanel", url: "https://www.chanel.com" },
+];
+
+const sportsBrands: BrandLink[] = [
+  { name: "Nike", url: "https://www.nike.com" },
+  { name: "Adidas", url: "https://www.adidas.com" },
+  { name: "Puma", url: "https://www.puma.com" },
+  { name: "Reebok", url: "https://www.reebok.com" },
+  { name: "Under Armour", url: "https://www.underarmour.com" },
+  { name: "Alo Yoga", url: "https://www.aloyoga.com" },
+  { name: "Champion", url: "https://www.champion.com" },
+  { name: "Lululemon", url: "https://www.lululemon.com" },
+  { name: "New Balance", url: "https://www.newbalance.com" },
+  { name: "Asics", url: "https://www.asics.com" },
+  { name: "The North Face", url: "https://www.thenorthface.com" },
+  { name: "Columbia", url: "https://www.columbia.com" },
+];
+
+const beautyBrands: BrandLink[] = [
+  { name: "Sephora", url: "https://www.sephora.com" },
+  { name: "Clinique", url: "https://www.clinique.com" },
+  { name: "MAC", url: "https://www.maccosmetics.com" },
+  { name: "Kiko Milano", url: "https://www.kikocosmetics.com" },
+  { name: "Guerlain", url: "https://www.guerlain.com" },
+  { name: "Chanel Beauty", url: "https://www.chanel.com/us/beauty/" },
+  { name: "YSL Beauty", url: "https://www.yslbeauty.com" },
+  { name: "Dior Beauty", url: "https://www.dior.com/en_us/beauty" },
+  { name: "Armani Beauty", url: "https://www.armanibeauty.com" },
+  { name: "Lancôme", url: "https://www.lancome.com" },
+  { name: "Estée Lauder", url: "https://www.esteelauder.com" },
+  { name: "Tom Ford Beauty", url: "https://www.tomford.com" },
+  { name: "Charlotte Tilbury", url: "https://www.charlottetilbury.com" },
+  { name: "Kérastase", url: "https://www.kerastase.com" },
+  { name: "NARS", url: "https://www.narscosmetics.com" },
+  { name: "Benefit", url: "https://www.benefitcosmetics.com" },
+  { name: "Rare Beauty", url: "https://www.rarebeauty.com" },
+  { name: "Fenty Beauty", url: "https://www.fentybeauty.com" },
+  { name: "Huda Beauty", url: "https://www.hudabeauty.com" },
+];
+
 export interface LocaleDictionary {
   dir: "rtl" | "ltr";
   nav: {
@@ -30,7 +99,7 @@ export interface LocaleDictionary {
   products: {
     title: string;
     subtitle: string;
-    categories: { name: string; brands: string[] }[];
+    categories: { name: string; brands: BrandLink[] }[];
   };
   membership: {
     title: string;
@@ -90,9 +159,9 @@ export const dictionary = {
       title: "دسته‌بندی محصولات",
       subtitle: "برندهای منتخب در حوزه پوشاک، زیبایی و ورزش",
       categories: [
-        { name: "پوشاک و استایل", brands: ["Zara", "Mango", "Gucci", "Dior", "Louis Vuitton"] },
-        { name: "زیبایی و آرایشی", brands: ["Chanel Beauty", "YSL Beauty", "Lancôme", "Sephora"] },
-        { name: "ورزشی و اکتیو", brands: ["Nike", "Adidas", "Puma", "Lululemon"] },
+        { name: "پوشاک و استایل", brands: fashionBrands },
+        { name: "زیبایی و آرایشی", brands: beautyBrands },
+        { name: "ورزشی و اکتیو", brands: sportsBrands },
       ],
     },
     membership: {
@@ -156,9 +225,9 @@ export const dictionary = {
       title: "Product Categories",
       subtitle: "Curated brands across fashion, beauty, and sport",
       categories: [
-        { name: "Fashion & Style", brands: ["Zara", "Mango", "Gucci", "Dior", "Louis Vuitton"] },
-        { name: "Beauty & Cosmetics", brands: ["Chanel Beauty", "YSL Beauty", "Lancôme", "Sephora"] },
-        { name: "Sport & Active", brands: ["Nike", "Adidas", "Puma", "Lululemon"] },
+        { name: "Fashion & Style", brands: fashionBrands },
+        { name: "Beauty & Cosmetics", brands: beautyBrands },
+        { name: "Sport & Active", brands: sportsBrands },
       ],
     },
     membership: {
