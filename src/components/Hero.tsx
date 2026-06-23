@@ -2,7 +2,7 @@
 
 import { useLocale } from "@/context/providers";
 import { whatsappLink } from "@/lib/dictionary";
-import { BrandMarquee } from "./BrandMarquee";
+import { BrandGrid } from "./BrandGrid";
 
 export function Hero() {
   const { dict } = useLocale();
@@ -30,7 +30,7 @@ export function Hero() {
       </div>
 
       <div className="mt-12">
-        <BrandMarquee />
+        <BrandGrid />
       </div>
     </section>
   );

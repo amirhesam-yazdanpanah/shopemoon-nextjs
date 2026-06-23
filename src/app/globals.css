@@ -23,57 +23,7 @@ body {
   }
 }
 
-.marquee-row {
-  overflow: hidden;
-  width: 100%;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-}
-
-.marquee-track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  gap: 16px;
-  will-change: transform;
-}
-
-.marquee-track-left {
-  animation: marquee-left 35s linear infinite;
-}
-
-.marquee-track-right {
-  animation: marquee-right 38s linear infinite;
-}
-
-.marquee-track > a {
-  position: relative;
-  flex: none;
-  white-space: nowrap;
-}
-
-/* the track holds 4 duplicated copies of the brand list, so moving by 50%
-   (= exactly 2 copy-widths) lands on a pixel-identical repeat: seamless,
-   infinite, no blank tail */
-@keyframes marquee-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes marquee-right {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.marquee-track .tooltip {
+.tooltip {
   position: absolute;
   bottom: calc(100% + 10px);
   left: 50%;
@@ -91,13 +41,7 @@ body {
   z-index: 20;
 }
 
-.marquee-track a:hover .tooltip,
-.marquee-track a:focus-visible .tooltip {
+a:hover .tooltip,
+a:focus-visible .tooltip {
   opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
 }
