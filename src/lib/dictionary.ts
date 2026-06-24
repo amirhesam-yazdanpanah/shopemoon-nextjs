@@ -141,7 +141,7 @@ const translatedDictionary = {
     nav: {
       home: "خانه",
       about: "درباره من",
-      products: "محصولات",
+      products: "فروشگاه‌ها",
       membership: "عضویت",
       faq: "سوالات",
       contact: "تماس",
@@ -155,7 +155,7 @@ const translatedDictionary = {
       whatsappMessage: "سلام، برای خرید از برندهای اورجینال راهنمایی می‌خواستم.",
     },
     trust: {
-      title: "چرا ShopeMoon؟",
+      title: "مراحل خرید در شاپمون",
       items: [
         { title: "خرید از فروشگاه‌های رسمی", desc: "تمام سفارش‌ها مستقیم از منابع معتبر تهیه می‌شوند." },
         { title: "بررسی موجودی و قیمت", desc: "پیش از پرداخت، موجودی و قیمت دقیق استعلام می‌شود." },
@@ -224,7 +224,7 @@ const translatedDictionary = {
       whatsappMessage: "Hi, I'd like guidance on buying original brand products.",
     },
     trust: {
-      title: "Why ShopeMoon?",
+      title: "Shopping Steps with ShopeMoon",
       items: [
         { title: "Official store purchases", desc: "Every order is sourced directly from authorized retailers." },
         { title: "Stock & price verification", desc: "Availability and exact pricing are confirmed before payment." },
@@ -295,7 +295,7 @@ const turkishDictionary = {
     whatsappMessage: "Merhaba, orijinal marka ürünleri satın almak için yardım istiyorum.",
   },
   trust: {
-    title: "Neden ShopeMoon?",
+    title: "ShopeMoon ile Alışveriş Adımları",
     items: [
       { title: "Resmi mağazalardan alışveriş", desc: "Her sipariş doğrudan yetkili satıcılardan temin edilir." },
       { title: "Stok ve fiyat kontrolü", desc: "Ödeme öncesi stok durumu ve kesin fiyat teyit edilir." },

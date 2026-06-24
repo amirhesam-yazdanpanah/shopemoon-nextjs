@@ -2,7 +2,6 @@
 
 import { useLocale } from "@/context/providers";
 import { whatsappLink } from "@/lib/dictionary";
-import { BrandGrid } from "./BrandGrid";
 
 export function Hero() {
   const { dict } = useLocale();
@@ -27,10 +26,6 @@ export function Hero() {
             {dict.hero.ctaPrimary}
           </a>
         </div>
-      </div>
-
-      <div className="mt-12">
-        <BrandGrid />
       </div>
     </section>
   );
