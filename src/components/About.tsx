@@ -1,21 +1,13 @@
-export function About() {
-  const paragraphs = [
-    "من مونا هستم و در ازمیر ترکیه زندگی می‌کنم.",
-    "بیش از ۷ سال است که به صورت حرفه‌ای در حوزه خرید و فروش آنلاین فعالیت می‌کنم و امروز جامعه‌ای با بیش از ۳۳ هزار دنبال‌کننده همراه من هستند.",
-    "شاپمون را با یک هدف ساده راه‌اندازی کردم: اینکه خرید از برندهای اصلی ترکیه برای ایرانی‌ها مطمئن، شفاف و بدون نگرانی باشد.",
-    "هر روز با فروشگاه‌ها و برندهای مختلف در ارتباط هستم و به خوبی می‌دانم پیدا کردن کالای اصل، بررسی موجودی، استعلام قیمت و ارسال مطمئن چقدر اهمیت دارد. به همین دلیل تلاش می‌کنم تمام مراحل خرید را با شفافیت کامل انجام دهم؛ از بررسی کالا و ارسال عکس و فاکتور گرفته تا پیگیری سفارش و تحویل نهایی.",
-    "در طول این سال‌ها، حتی در سخت‌ترین شرایط نیز ارتباط با مشتریان و پاسخگویی را متوقف نکرده‌ام. اعتماد مشتریان بزرگ‌ترین سرمایه من است و صدها تجربه موفق خرید و رضایت مشتری، نتیجه همین تعهد بوده است.",
-    "اگر تصمیم بگیرید از طریق شاپمون خرید کنید، با یک فروشگاه بی‌نام‌ونشان طرف نیستید؛ با شخصی در ازمیر در ارتباطی که خرید تو را مثل خرید خودش پیگیری می‌کند.",
-  ];
+"use client";
 
-  const stats = [
-    { value: "37,000+", label: "دنبال‌کننده" },
-    { value: "7", label: "سال تجربه خرید آنلاین" },
-    { value: "صدها", label: "مشتری راضی" },
-  ];
+import { useLocale } from "@/context/providers";
+
+export function About() {
+  const { locale, dict } = useLocale();
+  const { title, paragraphs, stats, quote } = dict.about;
 
   return (
-    <section id="about" dir="rtl" lang="fa" className="px-5 py-16">
+    <section id="about" dir={dict.dir} lang={locale} className="px-5 py-16">
       <div className="mx-auto max-w-2xl rounded-xl2 border border-gold-soft/50 bg-white/70 p-6 text-center shadow-card dark:border-navy-soft dark:bg-navy-soft/30 sm:p-10">
         <svg
           width="32"
@@ -31,7 +23,7 @@ export function About() {
           />
         </svg>
 
-        <h2 className="mt-4 text-2xl font-bold sm:text-3xl">درباره من</h2>
+        <h2 className="mt-4 text-2xl font-bold sm:text-3xl">{title}</h2>
 
         <div className="mt-6 space-y-4 text-start text-base leading-loose text-navy-soft dark:text-cream-dark">
           {paragraphs.map((paragraph, index) => (
@@ -51,8 +43,8 @@ export function About() {
           ))}
         </div>
 
-        <blockquote className="mt-8 border-r-4 border-gold ps-4 text-lg font-bold leading-relaxed">
-          «شاپمون نه یک فروشگاه، بلکه دوست معتمد تو هست»
+        <blockquote className="mt-8 border-s-4 border-gold ps-4 text-lg font-bold leading-relaxed">
+          {quote}
         </blockquote>
       </div>
     </section>

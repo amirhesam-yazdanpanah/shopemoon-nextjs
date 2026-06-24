@@ -133,6 +133,12 @@ export interface LocaleDictionary {
     rights: string;
   };
   theme: { light: string; dark: string };
+  about: {
+    title: string;
+    paragraphs: string[];
+    stats: { value: string; label: string }[];
+    quote: string;
+  };
 }
 
 const translatedDictionary = {
@@ -204,6 +210,23 @@ const translatedDictionary = {
       rights: "© ShopeMoon. تمامی حقوق محفوظ است.",
     },
     theme: { light: "روشن", dark: "تیره" },
+    about: {
+      title: "درباره من",
+      paragraphs: [
+        "من مونا هستم و در ازمیر ترکیه زندگی می‌کنم.",
+        "بیش از ۷ سال است که به صورت حرفه‌ای در حوزه خرید و فروش آنلاین فعالیت می‌کنم و امروز جامعه‌ای با بیش از ۳۳ هزار دنبال‌کننده همراه من هستند.",
+        "شاپمون را با یک هدف ساده راه‌اندازی کردم: اینکه خرید از برندهای اصلی ترکیه برای ایرانی‌ها مطمئن، شفاف و بدون نگرانی باشد.",
+        "هر روز با فروشگاه‌ها و برندهای مختلف در ارتباط هستم و به خوبی می‌دانم پیدا کردن کالای اصل، بررسی موجودی، استعلام قیمت و ارسال مطمئن چقدر اهمیت دارد. به همین دلیل تلاش می‌کنم تمام مراحل خرید را با شفافیت کامل انجام دهم؛ از بررسی کالا و ارسال عکس و فاکتور گرفته تا پیگیری سفارش و تحویل نهایی.",
+        "در طول این سال‌ها، حتی در سخت‌ترین شرایط نیز ارتباط با مشتریان و پاسخگویی را متوقف نکرده‌ام. اعتماد مشتریان بزرگ‌ترین سرمایه من است و صدها تجربه موفق خرید و رضایت مشتری، نتیجه همین تعهد بوده است.",
+        "اگر تصمیم بگیرید از طریق شاپمون خرید کنید، با یک فروشگاه بی‌نام‌ونشان طرف نیستید؛ با شخصی در ازمیر در ارتباطی که خرید تو را مثل خرید خودش پیگیری می‌کند.",
+      ],
+      stats: [
+        { value: "37,000+", label: "دنبال‌کننده" },
+        { value: "7", label: "سال تجربه خرید آنلاین" },
+        { value: "صدها", label: "مشتری راضی" },
+      ],
+      quote: "«شاپمون نه یک فروشگاه، بلکه دوست معتمد تو هست»",
+    },
   },
   en: {
     dir: "ltr" as const,
@@ -273,6 +296,23 @@ const translatedDictionary = {
       rights: "© ShopeMoon. All rights reserved.",
     },
     theme: { light: "Light", dark: "Dark" },
+    about: {
+      title: "About Me",
+      paragraphs: [
+        "I am Mona and I live in Izmir, Turkey.",
+        "For more than 7 years, I have been working professionally in online shopping and sales. Today, I am supported by a community of more than 37,000 followers.",
+        "I created ShopeMoon with one simple goal: to make shopping from original Turkish and international brands safe, transparent, and worry-free for Persian-speaking customers.",
+        "Every day, I stay in touch with different stores and brands, and I know how important it is to find authentic products, check availability, confirm prices, and arrange secure delivery. That is why I try to handle every step of the shopping process with full transparency, from checking the product and sending photos and invoices to tracking the order and final delivery.",
+        "Over the years, even in difficult situations, I have never stopped communicating with customers and responding to their questions. Customer trust is my most valuable asset, and hundreds of successful shopping experiences and satisfied customers are the result of this commitment.",
+        "When you shop through ShopeMoon, you are not dealing with an anonymous store. You are in direct contact with someone in Izmir who follows your purchase as carefully as her own.",
+      ],
+      stats: [
+        { value: "37,000+", label: "followers" },
+        { value: "7", label: "years of online shopping experience" },
+        { value: "Hundreds", label: "of satisfied customers" },
+      ],
+      quote: "“ShopeMoon is not just a store, it is your trusted shopping friend.”",
+    },
   },
 } satisfies Record<"fa" | "en", LocaleDictionary>;
 
@@ -344,6 +384,23 @@ const turkishDictionary = {
     rights: "© ShopeMoon. Tüm hakları saklıdır.",
   },
   theme: { light: "Açık", dark: "Koyu" },
+  about: {
+    title: "Hakkımda",
+    paragraphs: [
+      "Ben Mona, Türkiye İzmir'de yaşıyorum.",
+      "7 yıldan fazla süredir online alışveriş ve satış alanında profesyonel olarak çalışıyorum. Bugün 37.000'den fazla takipçiden oluşan bir topluluk benimle birlikte.",
+      "ShopeMoon'u basit bir amaçla kurdum: Türkiye'deki ve uluslararası orijinal markalardan alışverişi Farsça konuşan müşteriler için güvenli, şeffaf ve endişesiz hale getirmek.",
+      "Her gün farklı mağazalar ve markalarla iletişim halindeyim. Orijinal ürün bulmanın, stok kontrolü yapmanın, fiyat doğrulamanın ve güvenli teslimat sağlamanın ne kadar önemli olduğunu çok iyi biliyorum. Bu yüzden ürün kontrolünden fotoğraf ve fatura gönderimine, sipariş takibinden son teslimata kadar tüm alışveriş sürecini tam şeffaflıkla yürütmeye çalışıyorum.",
+      "Yıllar boyunca, zor zamanlarda bile müşterilerle iletişimi ve sorulara yanıt vermeyi hiç bırakmadım. Müşteri güveni benim en değerli sermayemdir. Yüzlerce başarılı alışveriş deneyimi ve memnun müşteri, bu bağlılığın sonucudur.",
+      "ShopeMoon üzerinden alışveriş yaptığınızda isimsiz bir mağazayla değil, İzmir'de sizin alışverişinizi kendi alışverişi gibi takip eden biriyle iletişim kurarsınız.",
+    ],
+    stats: [
+      { value: "37.000+", label: "takipçi" },
+      { value: "7", label: "yıllık online alışveriş deneyimi" },
+      { value: "Yüzlerce", label: "memnun müşteri" },
+    ],
+    quote: "“ShopeMoon sadece bir mağaza değil, güvenilir alışveriş arkadaşınızdır.”",
+  },
 } satisfies LocaleDictionary;
 
 export const dictionary: Record<Locale, LocaleDictionary> = {
