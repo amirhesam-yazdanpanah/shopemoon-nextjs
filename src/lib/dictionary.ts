@@ -96,6 +96,7 @@ export interface LocaleDictionary {
     ctaPrimary: string;
     ctaSecondary: string;
     whatsappMessage: string;
+    trustIndicators: string[];
   };
   trust: {
     title: string;
@@ -157,16 +158,17 @@ const translatedDictionary = {
       title: "خرید مستقیم از برندهای اورجینال",
       subtitle: "خرید حضوری و آنلاین از فروشگاه‌های معتبر ترکیه و اروپا",
       ctaPrimary: "پیام در واتساپ",
-      ctaSecondary: "محصولات را ببینید",
+      ctaSecondary: "مشاهده فروشگاه‌ها",
       whatsappMessage: "سلام، برای خرید از برندهای اورجینال راهنمایی می‌خواستم.",
+      trustIndicators: ["ضمانت اصالت کالا", "پاسخگویی سریع در واتساپ", "ارسال مطمئن"],
     },
     trust: {
       title: "مراحل خرید در شاپمون",
       items: [
-        { title: "خرید از فروشگاه‌های رسمی", desc: "تمام سفارش‌ها مستقیم از منابع معتبر تهیه می‌شوند." },
-        { title: "بررسی موجودی و قیمت", desc: "پیش از پرداخت، موجودی و قیمت دقیق استعلام می‌شود." },
-        { title: "راهنمایی سایز و رنگ", desc: "در انتخاب سایز و رنگ مناسب همراه شما هستیم." },
-        { title: "ارتباط مستقیم در واتساپ", desc: "پاسخگویی سریع و شفاف در تمام مراحل خرید." },
+        { title: "ارسال لینک محصول", desc: "لینک، عکس یا نام محصول مورد نظرتان را برای ما ارسال کنید." },
+        { title: "بررسی موجودی و قیمت", desc: "موجودی، قیمت و جزئیات کالا از فروشگاه رسمی بررسی می‌شود." },
+        { title: "پرداخت و خرید", desc: "پس از تأیید شما، خرید به صورت نهایی ثبت و پرداخت انجام می‌شود." },
+        { title: "ارسال و تحویل", desc: "کالا ارسال می‌شود و کد رهگیری در اختیار شما قرار می‌گیرد." },
       ],
     },
     products: {
@@ -232,8 +234,8 @@ const translatedDictionary = {
     dir: "ltr" as const,
     nav: {
       home: "Home",
-      about: "About",
-      products: "Products",
+      about: "About Me",
+      products: "Stores",
       membership: "Membership",
       faq: "FAQ",
       contact: "Contact",
@@ -243,16 +245,17 @@ const translatedDictionary = {
       title: "Buy Direct From Original Brands",
       subtitle: "In-person and online shopping from trusted Turkish and European retailers",
       ctaPrimary: "Message on WhatsApp",
-      ctaSecondary: "View Products",
+      ctaSecondary: "View Stores",
       whatsappMessage: "Hi, I'd like guidance on buying original brand products.",
+      trustIndicators: ["Authenticity guaranteed", "Fast WhatsApp replies", "Reliable delivery"],
     },
     trust: {
       title: "Shopping Steps with ShopeMoon",
       items: [
-        { title: "Official store purchases", desc: "Every order is sourced directly from authorized retailers." },
-        { title: "Stock & price verification", desc: "Availability and exact pricing are confirmed before payment." },
-        { title: "Size & color guidance", desc: "We help you choose the right size and color." },
-        { title: "Direct WhatsApp contact", desc: "Fast, transparent communication at every step." },
+        { title: "Send the product link", desc: "Send us a link, photo, or product name." },
+        { title: "Stock & price check", desc: "Availability, price, and details are verified with the official store." },
+        { title: "Payment & purchase", desc: "Once you confirm, the order is placed and payment is completed." },
+        { title: "Shipping & delivery", desc: "Your order ships and you receive a tracking code." },
       ],
     },
     products: {
@@ -321,7 +324,7 @@ const turkishDictionary = {
   nav: {
     home: "Ana Sayfa",
     about: "Hakkımda",
-    products: "Ürünler",
+    products: "Mağazalar",
     membership: "Üyelik",
     faq: "SSS",
     contact: "İletişim",
@@ -331,16 +334,17 @@ const turkishDictionary = {
     title: "Orijinal Markalardan Doğrudan Alışveriş",
     subtitle: "Güvenilir Türk ve Avrupa mağazalarından yüz yüze ve online alışveriş",
     ctaPrimary: "WhatsApp'tan Yazın",
-    ctaSecondary: "Ürünleri Görüntüle",
+    ctaSecondary: "Mağazaları Gör",
     whatsappMessage: "Merhaba, orijinal marka ürünleri satın almak için yardım istiyorum.",
+    trustIndicators: ["Orijinallik garantisi", "WhatsApp'tan hızlı yanıt", "Güvenli teslimat"],
   },
   trust: {
     title: "ShopeMoon ile Alışveriş Adımları",
     items: [
-      { title: "Resmi mağazalardan alışveriş", desc: "Her sipariş doğrudan yetkili satıcılardan temin edilir." },
-      { title: "Stok ve fiyat kontrolü", desc: "Ödeme öncesi stok durumu ve kesin fiyat teyit edilir." },
-      { title: "Beden ve renk rehberliği", desc: "Doğru beden ve rengi seçmenize yardımcı oluyoruz." },
-      { title: "Doğrudan WhatsApp iletişimi", desc: "Her aşamada hızlı ve şeffaf iletişim." },
+      { title: "Ürün linkini gönderin", desc: "Bize bir bağlantı, fotoğraf veya ürün adı gönderin." },
+      { title: "Stok ve fiyat kontrolü", desc: "Stok, fiyat ve ürün detayları resmi mağazadan teyit edilir." },
+      { title: "Ödeme ve satın alma", desc: "Onayınızdan sonra sipariş kesinleşir ve ödeme tamamlanır." },
+      { title: "Gönderim ve teslimat", desc: "Ürün gönderilir ve size bir takip kodu verilir." },
     ],
   },
   products: {
