@@ -6,7 +6,7 @@ import { whatsappLink } from "@/lib/dictionary";
 
 export function Membership() {
   const { dict } = useLocale();
-  const [form, setForm] = useState({ name: "", whatsapp: "", brands: "", details: "" });
+  const [form, setForm] = useState({ name: "", whatsapp: "", brands: "", details: "", address: "" });
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -15,6 +15,7 @@ export function Membership() {
       `${dict.membership.fields.name}: ${form.name}`,
       `${dict.membership.fields.whatsapp}: ${form.whatsapp}`,
       `${dict.membership.fields.brands}: ${form.brands || "-"}`,
+      `${dict.membership.fields.address}: ${form.address || "-"}`,
       `${dict.membership.fields.details}: ${form.details || "-"}`,
     ].join("\n");
     window.open(whatsappLink(message), "_blank", "noopener");
@@ -67,6 +68,19 @@ export function Membership() {
               id="brands"
               value={form.brands}
               onChange={(e) => setForm((f) => ({ ...f, brands: e.target.value }))}
+              className="rounded-lg border border-gold-soft/60 bg-white px-4 py-3 outline-none focus:border-gold focus:ring-2 focus:ring-gold-soft dark:bg-navy-soft/40"
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <label htmlFor="address" className="text-sm font-semibold">
+              {dict.membership.fields.address}
+            </label>
+            <input
+              id="address"
+              value={form.address}
+              onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
+              placeholder={dict.membership.fields.addressPlaceholder}
               className="rounded-lg border border-gold-soft/60 bg-white px-4 py-3 outline-none focus:border-gold focus:ring-2 focus:ring-gold-soft dark:bg-navy-soft/40"
             />
           </div>

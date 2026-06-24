@@ -11,10 +11,40 @@ export function Header() {
 
   const links = [
     { href: "#hero", label: dict.nav.home },
+    { href: "#about", label: dict.nav.about },
     { href: "#products", label: dict.nav.products },
     { href: "#membership", label: dict.nav.membership },
     { href: "#faq", label: dict.nav.faq },
     { href: "#contact", label: dict.nav.contact },
+  ];
+
+  const socialLinks = [
+    {
+      href: "https://www.instagram.com/shopemoon.tr/",
+      label: "Instagram",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.8" />
+          <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
+          <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+        </svg>
+      ),
+    },
+    {
+      href: "https://t.me/shopeemonn",
+      label: "Telegram",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M21 4 3 11.5l5.2 1.9L10 19l3-3.6 4.3 3.1L21 4Z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
+          <path d="M8.2 13.4 17 7.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -48,6 +78,20 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-1 border-e border-gold-soft/40 pe-2 md:flex">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-navy/70 transition hover:bg-cream-dark hover:text-gold dark:text-cream/70 dark:hover:bg-navy-soft"
+              >
+                {social.icon}
+              </a>
+            ))}
+          </div>
           <LanguageToggle />
           <ThemeToggle />
           <button
@@ -73,6 +117,21 @@ export function Header() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-4 flex items-center gap-2 border-t border-gold-soft/40 pt-4">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold-soft/40 text-navy/70 transition hover:bg-cream-dark hover:text-gold dark:text-cream/70 dark:hover:bg-navy-soft"
+              >
+                {social.icon}
+              </a>
+            ))}
+          </div>
         </nav>
       )}
     </header>

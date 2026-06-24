@@ -83,6 +83,7 @@ export interface LocaleDictionary {
   dir: "rtl" | "ltr";
   nav: {
     home: string;
+    about: string;
     products: string;
     membership: string;
     faq: string;
@@ -113,6 +114,8 @@ export interface LocaleDictionary {
       whatsapp: string;
       brands: string;
       details: string;
+      address: string;
+      addressPlaceholder: string;
     };
     submit: string;
   };
@@ -137,6 +140,7 @@ export const dictionary = {
     dir: "rtl" as const,
     nav: {
       home: "خانه",
+      about: "درباره من",
       products: "محصولات",
       membership: "عضویت",
       faq: "سوالات",
@@ -176,6 +180,8 @@ export const dictionary = {
         whatsapp: "شماره واتساپ",
         brands: "برندهای مورد علاقه",
         details: "توضیحات / درخواست خرید",
+        address: "آدرس",
+        addressPlaceholder: "آدرس خود را وارد کنید",
       },
       submit: "ارسال و عضویت",
     },
@@ -203,6 +209,7 @@ export const dictionary = {
     dir: "ltr" as const,
     nav: {
       home: "Home",
+      about: "About",
       products: "Products",
       membership: "Membership",
       faq: "FAQ",
@@ -242,6 +249,8 @@ export const dictionary = {
         whatsapp: "WhatsApp Number",
         brands: "Favorite Brands",
         details: "Details / Purchase Request",
+        address: "Address",
+        addressPlaceholder: "Enter your address",
       },
       submit: "Submit & Join",
     },
