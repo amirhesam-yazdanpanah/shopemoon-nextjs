@@ -23,12 +23,20 @@ export function Footer() {
             WhatsApp
           </a>
           <a
-            href="https://instagram.com/shopemoon"
+            href="https://www.instagram.com/shopemoon.tr/"
             target="_blank"
             rel="noopener noreferrer"
             className="opacity-90 hover:opacity-100 hover:text-gold-soft"
           >
             Instagram
+          </a>
+          <a
+            href="https://t.me/shopeemonn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="opacity-90 hover:opacity-100 hover:text-gold-soft"
+          >
+            Telegram
           </a>
         </div>
 

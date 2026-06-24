@@ -276,9 +276,77 @@ const translatedDictionary = {
   },
 } satisfies Record<"fa" | "en", LocaleDictionary>;
 
-// Turkish UI text isn't translated yet — selecting TR is a placeholder that
-// falls back to the English content/direction until real tr copy is added.
+const turkishDictionary = {
+  dir: "ltr" as const,
+  nav: {
+    home: "Ana Sayfa",
+    about: "Hakkımda",
+    products: "Ürünler",
+    membership: "Üyelik",
+    faq: "SSS",
+    contact: "İletişim",
+  },
+  hero: {
+    eyebrow: "ShopeMoon",
+    title: "Orijinal Markalardan Doğrudan Alışveriş",
+    subtitle: "Güvenilir Türk ve Avrupa mağazalarından yüz yüze ve online alışveriş",
+    ctaPrimary: "WhatsApp'tan Yazın",
+    ctaSecondary: "Ürünleri Görüntüle",
+    whatsappMessage: "Merhaba, orijinal marka ürünleri satın almak için yardım istiyorum.",
+  },
+  trust: {
+    title: "Neden ShopeMoon?",
+    items: [
+      { title: "Resmi mağazalardan alışveriş", desc: "Her sipariş doğrudan yetkili satıcılardan temin edilir." },
+      { title: "Stok ve fiyat kontrolü", desc: "Ödeme öncesi stok durumu ve kesin fiyat teyit edilir." },
+      { title: "Beden ve renk rehberliği", desc: "Doğru beden ve rengi seçmenize yardımcı oluyoruz." },
+      { title: "Doğrudan WhatsApp iletişimi", desc: "Her aşamada hızlı ve şeffaf iletişim." },
+    ],
+  },
+  products: {
+    title: "Ürün Kategorileri",
+    subtitle: "Moda, güzellik ve spor alanında seçilmiş markalar",
+    categories: [
+      { name: "Moda ve Stil", brands: fashionBrands },
+      { name: "Güzellik ve Kozmetik", brands: beautyBrands },
+      { name: "Spor ve Aktif Giyim", brands: sportsBrands },
+    ],
+  },
+  membership: {
+    title: "ShopeMoon'a Üye Ol",
+    desc: "ShopeMoon'a üye olarak satın alma taleplerinizi, favori markalarınızı ve iletişim bilgilerinizi kaydedebilir, ihtiyaç anında daha hızlı yardım alabilirsiniz.",
+    fields: {
+      name: "Ad Soyad",
+      whatsapp: "WhatsApp Numarası",
+      brands: "Favori Markalar",
+      details: "Detaylar / Satın Alma Talebi",
+      address: "Adres",
+      addressPlaceholder: "Adresinizi girin",
+    },
+    submit: "Gönder ve Üye Ol",
+  },
+  faq: {
+    title: "Sıkça Sorulan Sorular",
+    items: [
+      { q: "Ürünler orijinal mi?", a: "Evet, tüm satın almalar doğrudan resmi marka mağazalarından yapılır." },
+      { q: "Kargo ücreti ne kadar?", a: "Kargo ücreti hedefe ve ağırlığa göre değişir, ödeme öncesi bildirilir." },
+      { q: "Teslimat ne kadar sürer?", a: "Teslimat süresi çıkış ve varış noktasına göre değişir, sipariş onayında bildirilir." },
+      { q: "Nasıl sipariş verebilirim?", a: "WhatsApp üzerinden bize bir bağlantı, fotoğraf veya ürün adı göndermeniz yeterlidir." },
+    ],
+  },
+  contact: {
+    title: "Bize Ulaşın",
+    desc: "Sorularınız veya sipariş vermek için WhatsApp üzerinden bize ulaşın.",
+    cta: "WhatsApp'ta Sohbete Başla",
+  },
+  footer: {
+    tagline: "Orijinal Türk ve Avrupa markalarından güvenli alışveriş",
+    rights: "© ShopeMoon. Tüm hakları saklıdır.",
+  },
+  theme: { light: "Açık", dark: "Koyu" },
+} satisfies LocaleDictionary;
+
 export const dictionary: Record<Locale, LocaleDictionary> = {
   ...translatedDictionary,
-  tr: translatedDictionary.en,
+  tr: turkishDictionary,
 };

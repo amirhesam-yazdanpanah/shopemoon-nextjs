@@ -17,7 +17,7 @@ export function ProductShowcase() {
           {dict.products.categories.map((cat) => (
             <div
               key={cat.name}
-              className="rounded-xl2 border border-gold-soft/50 bg-white/70 p-6 shadow-card dark:border-navy-soft dark:bg-navy-soft/30"
+              className="rounded-xl2 bg-white/70 p-6 shadow-card dark:bg-navy-soft/30"
             >
               <h3 className="text-lg font-bold text-gold">{cat.name}</h3>
               <ul className="mt-4 space-y-2 text-sm">
