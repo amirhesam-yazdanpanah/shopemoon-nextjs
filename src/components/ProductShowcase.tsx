@@ -6,7 +6,7 @@ export function ProductShowcase() {
   const { dict } = useLocale();
 
   return (
-    <section id="products" className="px-5 py-16">
+    <section id="products" className="px-5 py-20">
       <div className="mx-auto max-w-6xl">
         <h2 className="text-center text-2xl font-bold sm:text-3xl">{dict.products.title}</h2>
         <p className="mx-auto mt-3 max-w-xl text-center text-navy-soft dark:text-cream-dark">

@@ -8,7 +8,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="px-5 py-16">
+    <section id="faq" className="px-5 py-20">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-center text-2xl font-bold sm:text-3xl">{dict.faq.title}</h2>
 
