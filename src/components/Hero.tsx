@@ -1,20 +1,38 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale } from "@/context/providers";
 import { whatsappLink } from "@/lib/dictionary";
-import { HeroIllustration } from "./HeroIllustration";
 
 export function Hero() {
   const { dict } = useLocale();
 
   return (
-    <section id="hero" className="relative overflow-hidden px-5 py-20 md:py-28">
+    <section id="hero" className="relative overflow-x-clip px-5 py-20 md:py-28">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(circle_at_50%_0%,rgba(201,162,93,0.16),transparent_60%)]"
       />
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
+      {/* Decorative background portrait — not page content, purely atmospheric */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -end-10 top-1/2 -z-10 w-[260px] -translate-y-1/2 opacity-[0.07] sm:w-[320px] sm:opacity-[0.1] md:-end-16 md:w-[380px] md:opacity-[0.14] lg:-end-20 lg:w-[460px] lg:opacity-[0.18]"
+        style={{
+          maskImage: "radial-gradient(ellipse 65% 75% at center, black 45%, transparent 85%)",
+          WebkitMaskImage: "radial-gradient(ellipse 65% 75% at center, black 45%, transparent 85%)",
+        }}
+      >
+        <Image
+          src="/hero-background.png"
+          alt=""
+          width={1065}
+          height={1477}
+          className="h-auto w-full"
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div className="max-w-xl text-center lg:text-start">
           <span className="inline-flex items-center gap-2 rounded-full bg-gold-soft/60 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gold dark:bg-navy-soft/60">
             ShopeMoon
@@ -60,10 +78,6 @@ export function Hero() {
               </span>
             ))}
           </div>
-        </div>
-
-        <div className="hidden shrink-0 opacity-25 lg:block" aria-hidden="true">
-          <HeroIllustration />
         </div>
       </div>
     </section>
