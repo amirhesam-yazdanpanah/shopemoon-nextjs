@@ -1,4 +1,4 @@
-export type Locale = "fa" | "en";
+export type Locale = "fa" | "en" | "tr";
 
 export const whatsappNumber = "989109798803";
 
@@ -135,7 +135,7 @@ export interface LocaleDictionary {
   theme: { light: string; dark: string };
 }
 
-export const dictionary = {
+const translatedDictionary = {
   fa: {
     dir: "rtl" as const,
     nav: {
@@ -274,4 +274,11 @@ export const dictionary = {
     },
     theme: { light: "Light", dark: "Dark" },
   },
-} satisfies Record<Locale, LocaleDictionary>;
+} satisfies Record<"fa" | "en", LocaleDictionary>;
+
+// Turkish UI text isn't translated yet — selecting TR is a placeholder that
+// falls back to the English content/direction until real tr copy is added.
+export const dictionary: Record<Locale, LocaleDictionary> = {
+  ...translatedDictionary,
+  tr: translatedDictionary.en,
+};

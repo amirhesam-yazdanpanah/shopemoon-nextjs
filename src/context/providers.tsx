@@ -21,7 +21,7 @@ interface ThemeContextValue {
 interface LocaleContextValue {
   locale: Locale;
   dict: LocaleDictionary;
-  toggleLocale: () => void;
+  selectLocale: (locale: Locale) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -65,14 +65,14 @@ export function AppProviders({ children }: { children: ReactNode }) {
     setTheme((t) => (t === "light" ? "dark" : "light"));
   }, []);
 
-  const toggleLocale = useCallback(() => {
-    setLocale((l) => (l === "fa" ? "en" : "fa"));
+  const selectLocale = useCallback((next: Locale) => {
+    setLocale(next);
   }, []);
 
   const themeValue = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
   const localeValue = useMemo(
-    () => ({ locale, dict: dictionary[locale], toggleLocale }),
-    [locale, toggleLocale]
+    () => ({ locale, dict: dictionary[locale], selectLocale }),
+    [locale, selectLocale]
   );
 
   return (
