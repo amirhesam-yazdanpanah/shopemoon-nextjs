@@ -47,8 +47,6 @@ export default function RootLayout({
             agent-id="agent_1301kvzjfw9xed4vt4t83qd5md2k"
             placement="bottom-right"
             text-contents={elevenLabsTextContents}
-            avatar-orb-color-1="#c9a25d"
-            avatar-orb-color-2="#f7f1e6"
           ></elevenlabs-convai>
         </div>
         <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="afterInteractive" async />

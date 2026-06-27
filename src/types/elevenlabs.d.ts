@@ -7,8 +7,6 @@ declare global {
         "agent-id"?: string;
         placement?: string;
         "text-contents"?: string;
-        "avatar-orb-color-1"?: string;
-        "avatar-orb-color-2"?: string;
       };
     }
   }
