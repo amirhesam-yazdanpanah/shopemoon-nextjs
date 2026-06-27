@@ -120,6 +120,21 @@ export interface LocaleDictionary {
     };
     submit: string;
   };
+  experience: {
+    title: string;
+    intro: string;
+    fields: {
+      name: string;
+      whatsapp: string;
+      product: string;
+      rating: string;
+      feedback: string;
+      photo: string;
+    };
+    submit: string;
+    moderationNote: string;
+    rewardNote: string;
+  };
   faq: {
     title: string;
     items: { q: string; a: string }[];
@@ -170,6 +185,21 @@ const translatedDictionary = {
         { title: "پرداخت و خرید", desc: "پس از تأیید شما، خرید به صورت نهایی ثبت و پرداخت انجام می‌شود." },
         { title: "ارسال و تحویل", desc: "کالا ارسال می‌شود و کد رهگیری در اختیار شما قرار می‌گیرد." },
       ],
+    },
+    experience: {
+      title: "تجربه خرید با شاپمون",
+      intro: "تجربه خریدت با شاپمون رو با ما به اشتراک بذار؛ با ارسال عکس، نظر و رضایتت، برای خرید بعدی امتیاز یا تخفیف دریافت می‌کنی.",
+      fields: {
+        name: "نام و نام خانوادگی",
+        whatsapp: "شماره واتساپ",
+        product: "نام برند یا محصولی که خریدی",
+        rating: "امتیاز خرید از ۱ تا ۵",
+        feedback: "متن رضایت یا تجربه خرید",
+        photo: "آپلود عکس رضایت / محصول",
+      },
+      submit: "ارسال تجربه خرید",
+      moderationNote: "نظرات پس از بررسی تیم شاپمون منتشر می‌شوند.",
+      rewardNote: "با ارسال تجربه خرید، کد تخفیف خرید بعدی برای شما از طریق واتساپ ارسال می‌شود.",
     },
     products: {
       title: "دسته‌بندی محصولات",
@@ -257,6 +287,21 @@ const translatedDictionary = {
         { title: "Payment & purchase", desc: "Once you confirm, the order is placed and payment is completed." },
         { title: "Shipping & delivery", desc: "Your order ships and you receive a tracking code." },
       ],
+    },
+    experience: {
+      title: "Your ShopeMoon Shopping Experience",
+      intro: "Share your ShopeMoon shopping experience with us — send a photo, your feedback, and your satisfaction to earn points or a discount on your next purchase.",
+      fields: {
+        name: "Full Name",
+        whatsapp: "WhatsApp Number",
+        product: "Brand or product you purchased",
+        rating: "Rate your purchase from 1 to 5",
+        feedback: "Your feedback or shopping experience",
+        photo: "Upload a satisfaction / product photo",
+      },
+      submit: "Submit My Experience",
+      moderationNote: "Reviews are published only after the ShopeMoon team reviews them.",
+      rewardNote: "After submitting your experience, your next-purchase discount code will be sent to you via WhatsApp.",
     },
     products: {
       title: "Product Categories",
@@ -346,6 +391,21 @@ const turkishDictionary = {
       { title: "Ödeme ve satın alma", desc: "Onayınızdan sonra sipariş kesinleşir ve ödeme tamamlanır." },
       { title: "Gönderim ve teslimat", desc: "Ürün gönderilir ve size bir takip kodu verilir." },
     ],
+  },
+  experience: {
+    title: "ShopeMoon Alışveriş Deneyiminiz",
+    intro: "ShopeMoon ile alışveriş deneyiminizi bizimle paylaşın; bir fotoğraf, yorumunuz ve memnuniyetinizi gönderdiğinizde bir sonraki alışverişiniz için puan veya indirim kazanırsınız.",
+    fields: {
+      name: "Ad Soyad",
+      whatsapp: "WhatsApp Numarası",
+      product: "Satın aldığınız marka veya ürün",
+      rating: "Alışverişinizi 1'den 5'e kadar puanlayın",
+      feedback: "Yorumunuz veya alışveriş deneyiminiz",
+      photo: "Memnuniyet / ürün fotoğrafı yükleyin",
+    },
+    submit: "Deneyimimi Gönder",
+    moderationNote: "Yorumlar yalnızca ShopeMoon ekibi tarafından incelendikten sonra yayınlanır.",
+    rewardNote: "Deneyiminizi gönderdiğinizde, bir sonraki alışverişiniz için indirim kodu WhatsApp üzerinden size gönderilir.",
   },
   products: {
     title: "Ürün Kategorileri",
