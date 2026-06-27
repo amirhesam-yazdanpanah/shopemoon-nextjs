@@ -60,7 +60,7 @@ elevenlabs-convai {
 
 @media (max-width: 768px) {
   elevenlabs-convai {
-    transform: scale(0.75) !important;
+    transform: scale(0.55) !important;
     transform-origin: bottom right !important;
     right: 8px !important;
     bottom: 8px !important;
