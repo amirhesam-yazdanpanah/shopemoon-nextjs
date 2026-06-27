@@ -152,7 +152,7 @@ export interface LocaleDictionary {
     tagline: string;
     rights: string;
   };
-  theme: { light: string; dark: string };
+  theme: { light: string; dark: string; toggleLabel: string };
   about: {
     title: string;
     paragraphs: string[];
@@ -249,7 +249,7 @@ const translatedDictionary = {
       tagline: "خرید امن از برندهای اصلی ترکیه و اروپا",
       rights: "© ShopeMoon. تمامی حقوق محفوظ است.",
     },
-    theme: { light: "روشن", dark: "تیره" },
+    theme: { light: "روشن", dark: "تیره", toggleLabel: "حالت شب / روز" },
     about: {
       title: "درباره من",
       paragraphs: [
@@ -356,7 +356,7 @@ const translatedDictionary = {
       tagline: "Secure shopping from authentic Turkish and European brands",
       rights: "© ShopeMoon. All rights reserved.",
     },
-    theme: { light: "Light", dark: "Dark" },
+    theme: { light: "Light", dark: "Dark", toggleLabel: "Light / Dark Mode" },
     about: {
       title: "About Me",
       paragraphs: [
@@ -465,7 +465,7 @@ const turkishDictionary = {
     tagline: "Orijinal Türk ve Avrupa markalarından güvenli alışveriş",
     rights: "© ShopeMoon. Tüm hakları saklıdır.",
   },
-  theme: { light: "Açık", dark: "Koyu" },
+  theme: { light: "Açık", dark: "Koyu", toggleLabel: "Açık / Koyu Mod" },
   about: {
     title: "Hakkımda",
     paragraphs: [

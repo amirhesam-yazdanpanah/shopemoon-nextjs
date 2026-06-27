@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useExperienceModal, useLocale } from "@/context/providers";
-import { ThemeToggle } from "./ThemeToggle";
+import { useExperienceModal, useLocale, useTheme } from "@/context/providers";
+import { ThemeToggle, MoonIcon, SunIcon } from "./ThemeToggle";
 import { LanguageToggle } from "./LanguageToggle";
 
 export function Header() {
   const { dict } = useLocale();
   const { openModal } = useExperienceModal();
+  const { theme, toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
 
   const links: { href?: string; label: string; action?: () => void }[] = [
@@ -143,6 +144,15 @@ export function Header() {
               </li>
             ))}
           </ul>
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="mt-4 flex w-full items-center gap-2 border-t border-gold-soft/40 pt-4 text-sm font-semibold text-navy/80 transition hover:text-gold dark:text-cream/80"
+          >
+            {theme === "light" ? <MoonIcon /> : <SunIcon />}
+            {dict.theme.toggleLabel}
+          </button>
 
           <div className="mt-4 flex items-center gap-2 border-t border-gold-soft/40 pt-4">
             {socialLinks.map((social) => (
