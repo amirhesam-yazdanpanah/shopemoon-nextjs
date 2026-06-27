@@ -24,8 +24,15 @@ interface LocaleContextValue {
   selectLocale: (locale: Locale) => void;
 }
 
+interface ExperienceModalContextValue {
+  isOpen: boolean;
+  openModal: () => void;
+  closeModal: () => void;
+}
+
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 const LocaleContext = createContext<LocaleContextValue | null>(null);
+const ExperienceModalContext = createContext<ExperienceModalContextValue | null>(null);
 
 export function useTheme() {
   const ctx = useContext(ThemeContext);
@@ -39,9 +46,16 @@ export function useLocale() {
   return ctx;
 }
 
+export function useExperienceModal() {
+  const ctx = useContext(ExperienceModalContext);
+  if (!ctx) throw new Error("useExperienceModal must be used within AppProviders");
+  return ctx;
+}
+
 export function AppProviders({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
   const [locale, setLocale] = useState<Locale>("fa");
+  const [isExperienceModalOpen, setIsExperienceModalOpen] = useState(false);
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem("sm-theme") as Theme | null;
@@ -69,15 +83,26 @@ export function AppProviders({ children }: { children: ReactNode }) {
     setLocale(next);
   }, []);
 
+  const openModal = useCallback(() => setIsExperienceModalOpen(true), []);
+  const closeModal = useCallback(() => setIsExperienceModalOpen(false), []);
+
   const themeValue = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
   const localeValue = useMemo(
     () => ({ locale, dict: dictionary[locale], selectLocale }),
     [locale, selectLocale]
   );
+  const experienceModalValue = useMemo(
+    () => ({ isOpen: isExperienceModalOpen, openModal, closeModal }),
+    [isExperienceModalOpen, openModal, closeModal]
+  );
 
   return (
     <ThemeContext.Provider value={themeValue}>
-      <LocaleContext.Provider value={localeValue}>{children}</LocaleContext.Provider>
+      <LocaleContext.Provider value={localeValue}>
+        <ExperienceModalContext.Provider value={experienceModalValue}>
+          {children}
+        </ExperienceModalContext.Provider>
+      </LocaleContext.Provider>
     </ThemeContext.Provider>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useLocale } from "@/context/providers";
+import { useExperienceModal, useLocale } from "@/context/providers";
 import { ExperienceForm } from "./ExperienceForm";
 
 const STORAGE_KEY = "sm-experience-modal-until";
@@ -23,28 +23,30 @@ function suppressForDays(days: number) {
 
 export function ExperienceModal() {
   const { dict, locale } = useLocale();
-  const [open, setOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useExperienceModal();
   const [visible, setVisible] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const triggeredRef = useRef(false);
+  const autoTriggeredRef = useRef(false);
 
-  const triggerOpen = useCallback(() => {
-    if (triggeredRef.current || isSuppressed()) return;
-    triggeredRef.current = true;
+  // Automatic trigger: 15s timer OR 50% scroll, whichever fires first —
+  // gated by the 7-day localStorage suppression window. A manual open via
+  // the navbar button (openModal from context) bypasses this entirely.
+  const triggerAutoOpen = useCallback(() => {
+    if (autoTriggeredRef.current || isSuppressed()) return;
+    autoTriggeredRef.current = true;
     suppressForDays(SUPPRESS_DAYS);
-    setOpen(true);
-  }, []);
+    openModal();
+  }, [openModal]);
 
   useEffect(() => {
     if (isSuppressed()) return;
 
-    const timer = window.setTimeout(triggerOpen, TIME_TRIGGER_MS);
+    const timer = window.setTimeout(triggerAutoOpen, TIME_TRIGGER_MS);
 
     function handleScroll() {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       if (scrollable <= 0) return;
       if (window.scrollY / scrollable >= SCROLL_TRIGGER_RATIO) {
-        triggerOpen();
+        triggerAutoOpen();
       }
     }
 
@@ -54,25 +56,22 @@ export function ExperienceModal() {
       window.clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [triggerOpen]);
+  }, [triggerAutoOpen]);
 
   useEffect(() => {
-    if (open) {
+    if (isOpen) {
       const raf = requestAnimationFrame(() => setVisible(true));
       return () => cancelAnimationFrame(raf);
     }
     setVisible(false);
-  }, [open]);
+  }, [isOpen]);
 
   function close() {
     setVisible(false);
-    window.setTimeout(() => {
-      setOpen(false);
-      setShowForm(false);
-    }, 200);
+    window.setTimeout(closeModal, 200);
   }
 
-  if (!open) return null;
+  if (!isOpen) return null;
 
   return (
     <div
@@ -100,33 +99,26 @@ export function ExperienceModal() {
           ✕
         </button>
 
-        {showForm ? (
-          <ExperienceForm onSubmitted={close} />
-        ) : (
-          <div className="text-center">
-            <h2 className="mt-2 text-2xl font-bold sm:text-3xl">{dict.experience.teaserTitle}</h2>
-            <p className="mx-auto mt-4 max-w-sm leading-relaxed text-navy-soft dark:text-cream-dark">
-              {dict.experience.teaserDesc}
-            </p>
+        <div className="text-center">
+          <h2 className="mt-2 text-2xl font-bold sm:text-3xl">{dict.experience.teaserTitle}</h2>
+          <p className="mx-auto mt-4 max-w-sm whitespace-pre-line leading-relaxed text-navy-soft dark:text-cream-dark">
+            {dict.experience.teaserDesc}
+          </p>
+        </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <button
-                type="button"
-                onClick={() => setShowForm(true)}
-                className="rounded-full bg-gradient-to-br from-gold to-gold-light px-8 py-3 font-bold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft"
-              >
-                {dict.experience.teaserCta}
-              </button>
-              <button
-                type="button"
-                onClick={close}
-                className="rounded-full border border-gold-soft bg-white/70 px-8 py-3 font-bold text-navy transition hover:bg-cream-dark dark:bg-navy-soft/60 dark:text-cream"
-              >
-                {dict.experience.teaserLater}
-              </button>
-            </div>
-          </div>
-        )}
+        <div className="mt-8">
+          <ExperienceForm onSubmitted={close} />
+        </div>
+
+        <div className="mt-4 text-center">
+          <button
+            type="button"
+            onClick={close}
+            className="text-sm font-semibold text-navy-soft underline-offset-2 transition hover:text-gold hover:underline dark:text-cream-dark"
+          >
+            {dict.experience.teaserLater}
+          </button>
+        </div>
       </div>
     </div>
   );

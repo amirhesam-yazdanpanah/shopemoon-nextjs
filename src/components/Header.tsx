@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { useLocale } from "@/context/providers";
+import { useExperienceModal, useLocale } from "@/context/providers";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageToggle } from "./LanguageToggle";
 
 export function Header() {
   const { dict } = useLocale();
+  const { openModal } = useExperienceModal();
   const [open, setOpen] = useState(false);
 
-  const links = [
+  const links: { href?: string; label: string; action?: () => void }[] = [
     { href: "#hero", label: dict.nav.home },
     { href: "#about", label: dict.nav.about },
     { href: "#products", label: dict.nav.products },
+    { label: dict.nav.experience, action: openModal },
     { href: "#membership", label: dict.nav.membership },
     { href: "#faq", label: dict.nav.faq },
     { href: "#contact", label: dict.nav.contact },
@@ -70,11 +72,22 @@ export function Header() {
         </a>
 
         <nav className="hidden items-center gap-6 text-sm font-semibold md:flex">
-          {links.map((link) => (
-            <a key={link.href} href={link.href} className="transition hover:text-gold">
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.action ? (
+              <button
+                key={link.label}
+                type="button"
+                onClick={link.action}
+                className="transition hover:text-gold"
+              >
+                {link.label}
+              </button>
+            ) : (
+              <a key={link.href} href={link.href} className="transition hover:text-gold">
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -110,10 +123,23 @@ export function Header() {
         <nav className="border-t border-gold-soft/40 bg-cream px-5 py-4 dark:border-navy-soft dark:bg-navy-dark md:hidden">
           <ul className="flex flex-col gap-3 text-sm font-semibold">
             {links.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} onClick={() => setOpen(false)} className="block py-1">
-                  {link.label}
-                </a>
+              <li key={link.label}>
+                {link.action ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      link.action?.();
+                    }}
+                    className="block py-1 text-start"
+                  >
+                    {link.label}
+                  </button>
+                ) : (
+                  <a href={link.href} onClick={() => setOpen(false)} className="block py-1">
+                    {link.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

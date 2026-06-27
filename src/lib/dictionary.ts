@@ -85,6 +85,7 @@ export interface LocaleDictionary {
     home: string;
     about: string;
     products: string;
+    experience: string;
     membership: string;
     faq: string;
     contact: string;
@@ -136,7 +137,6 @@ export interface LocaleDictionary {
     rewardNote: string;
     teaserTitle: string;
     teaserDesc: string;
-    teaserCta: string;
     teaserLater: string;
   };
   faq: {
@@ -168,6 +168,7 @@ const translatedDictionary = {
       home: "خانه",
       about: "درباره من",
       products: "فروشگاه‌ها",
+      experience: "تجربه خرید",
       membership: "عضویت",
       faq: "سوالات",
       contact: "تماس",
@@ -201,12 +202,11 @@ const translatedDictionary = {
         feedback: "متن رضایت یا تجربه خرید",
         photo: "آپلود عکس رضایت / محصول",
       },
-      submit: "ارسال تجربه خرید",
-      moderationNote: "نظرات پس از بررسی تیم شاپمون منتشر می‌شوند.",
+      submit: "ثبت تجربه خرید",
+      moderationNote: "نظرات پس از بررسی تیم شاپمون منتشر خواهند شد.",
       rewardNote: "با ارسال تجربه خرید، کد تخفیف خرید بعدی برای شما از طریق واتساپ ارسال می‌شود.",
-      teaserTitle: "🎁 تجربه خریدت با شاپمون",
-      teaserDesc: "اگر از خریدت راضی بودی، با ارسال عکس، نظر و تجربه‌ات، برای خرید بعدی کد تخفیف یا امتیاز هدیه دریافت کن.",
-      teaserCta: "ثبت تجربه خرید",
+      teaserTitle: "🎁 تجربه خرید با شاپمون",
+      teaserDesc: "اگر از خریدت راضی بودی،\nبا ارسال عکس، نظر و تجربه خریدت،\nبرای خرید بعدی کد تخفیف یا امتیاز هدیه دریافت کن.",
       teaserLater: "بعداً",
     },
     products: {
@@ -274,6 +274,7 @@ const translatedDictionary = {
       home: "Home",
       about: "About Me",
       products: "Stores",
+      experience: "Reviews",
       membership: "Membership",
       faq: "FAQ",
       contact: "Contact",
@@ -308,11 +309,11 @@ const translatedDictionary = {
         photo: "Upload a satisfaction / product photo",
       },
       submit: "Submit My Experience",
-      moderationNote: "Reviews are published only after the ShopeMoon team reviews them.",
+      moderationNote: "Reviews will be published after the ShopeMoon team reviews them.",
       rewardNote: "After submitting your experience, your next-purchase discount code will be sent to you via WhatsApp.",
       teaserTitle: "🎁 Your ShopeMoon Experience",
-      teaserDesc: "If you were happy with your purchase, send a photo, your feedback, and your experience to get a discount code or reward points on your next order.",
-      teaserCta: "Share My Experience",
+      teaserDesc:
+        "If you were happy with your purchase,\nsend a photo, your feedback, and your experience\nto get a discount code or reward points on your next order.",
       teaserLater: "Later",
     },
     products: {
@@ -382,6 +383,7 @@ const turkishDictionary = {
     home: "Ana Sayfa",
     about: "Hakkımda",
     products: "Mağazalar",
+    experience: "Alışveriş Deneyimi",
     membership: "Üyelik",
     faq: "SSS",
     contact: "İletişim",
@@ -416,11 +418,11 @@ const turkishDictionary = {
       photo: "Memnuniyet / ürün fotoğrafı yükleyin",
     },
     submit: "Deneyimimi Gönder",
-    moderationNote: "Yorumlar yalnızca ShopeMoon ekibi tarafından incelendikten sonra yayınlanır.",
+    moderationNote: "Yorumlar, ShopeMoon ekibi tarafından incelendikten sonra yayınlanacaktır.",
     rewardNote: "Deneyiminizi gönderdiğinizde, bir sonraki alışverişiniz için indirim kodu WhatsApp üzerinden size gönderilir.",
     teaserTitle: "🎁 ShopeMoon Deneyiminiz",
-    teaserDesc: "Alışverişinizden memnun kaldıysanız; bir fotoğraf, yorumunuz ve deneyiminizi göndererek bir sonraki siparişiniz için indirim kodu veya ödül puanı kazanın.",
-    teaserCta: "Deneyimimi Paylaş",
+    teaserDesc:
+      "Alışverişinizden memnun kaldıysanız,\nbir fotoğraf, yorumunuz ve deneyiminizi göndererek\nbir sonraki siparişiniz için indirim kodu veya ödül puanı kazanın.",
     teaserLater: "Sonra",
   },
   products: {
