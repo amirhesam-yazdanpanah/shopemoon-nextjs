@@ -20,6 +20,21 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Real key names read by @elevenlabs/convai-widget-core's text-contents
+// attribute (verified against the package source, not docs):
+// main_label, start_call, end_call, expand, collapse, listening_status,
+// speaking_status. Flat attributes like "action-text"/"start-call-text"
+// are not read by the widget at all.
+const elevenLabsTextContents = JSON.stringify({
+  main_label: "هر سوالی داری از من بپرس",
+  start_call: "شروع تماس صوتی",
+  end_call: "پایان تماس",
+  expand: "باز کردن دستیار",
+  collapse: "بستن دستیار",
+  listening_status: "دارم به حرفت گوش میدم…",
+  speaking_status: "در حال پاسخ دادن…",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -29,8 +44,10 @@ export default function RootLayout({
         <AppProviders>{children}</AppProviders>
         <elevenlabs-convai
           agent-id="agent_1301kvzjfw9xed4vt4t83qd5md2k"
-          action-text="هر سوالی داری از من بپرس"
-          start-call-text="شروع تماس صوتی"
+          placement="bottom-left"
+          text-contents={elevenLabsTextContents}
+          avatar-orb-color-1="#c9a25d"
+          avatar-orb-color-2="#f7f1e6"
         ></elevenlabs-convai>
         <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="afterInteractive" async />
       </body>
