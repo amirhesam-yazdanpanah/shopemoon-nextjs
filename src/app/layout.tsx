@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { AppProviders } from "@/context/providers";
 import "./globals.css";
 
@@ -26,6 +27,8 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body className="bg-cream text-navy dark:bg-navy-dark dark:text-cream transition-colors duration-300">
         <AppProviders>{children}</AppProviders>
+        <elevenlabs-convai agent-id="agent_1301kvzjfw9xed4vt4t83qd5md2k"></elevenlabs-convai>
+        <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="afterInteractive" async />
       </body>
     </html>
   );
