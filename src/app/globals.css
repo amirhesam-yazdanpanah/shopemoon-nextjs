@@ -45,3 +45,24 @@ a:hover .tooltip,
 a:focus-visible .tooltip {
   opacity: 1;
 }
+
+/* ElevenLabs ConvAI voice widget: pin bottom-right and shrink on mobile so
+   it stays tappable without covering hero CTAs/trust badges. The widget
+   renders its host element in light DOM with an open shadow root inside —
+   transform/position on the host element itself is not shadow-encapsulated,
+   so this works without needing a wrapper div. */
+elevenlabs-convai {
+  position: fixed !important;
+  right: 16px !important;
+  bottom: 16px !important;
+  z-index: 50 !important;
+}
+
+@media (max-width: 768px) {
+  elevenlabs-convai {
+    transform: scale(0.75) !important;
+    transform-origin: bottom right !important;
+    right: 8px !important;
+    bottom: 8px !important;
+  }
+}
