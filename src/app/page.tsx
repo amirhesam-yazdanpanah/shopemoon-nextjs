@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { TrustBadges } from "@/components/TrustBadges";
-import { ExperienceShare } from "@/components/ExperienceShare";
+import { ExperienceModal } from "@/components/ExperienceModal";
 import { About } from "@/components/About";
 import { ProductShowcase } from "@/components/ProductShowcase";
 import { Membership } from "@/components/Membership";
@@ -17,7 +17,6 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBadges />
-        <ExperienceShare />
         <About />
         <ProductShowcase />
         <Membership />
@@ -26,6 +25,7 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <ExperienceModal />
     </>
   );
 }

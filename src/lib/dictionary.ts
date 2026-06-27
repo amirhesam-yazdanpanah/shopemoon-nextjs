@@ -134,6 +134,10 @@ export interface LocaleDictionary {
     submit: string;
     moderationNote: string;
     rewardNote: string;
+    teaserTitle: string;
+    teaserDesc: string;
+    teaserCta: string;
+    teaserLater: string;
   };
   faq: {
     title: string;
@@ -200,6 +204,10 @@ const translatedDictionary = {
       submit: "ارسال تجربه خرید",
       moderationNote: "نظرات پس از بررسی تیم شاپمون منتشر می‌شوند.",
       rewardNote: "با ارسال تجربه خرید، کد تخفیف خرید بعدی برای شما از طریق واتساپ ارسال می‌شود.",
+      teaserTitle: "🎁 تجربه خریدت با شاپمون",
+      teaserDesc: "اگر از خریدت راضی بودی، با ارسال عکس، نظر و تجربه‌ات، برای خرید بعدی کد تخفیف یا امتیاز هدیه دریافت کن.",
+      teaserCta: "ثبت تجربه خرید",
+      teaserLater: "بعداً",
     },
     products: {
       title: "دسته‌بندی محصولات",
@@ -302,6 +310,10 @@ const translatedDictionary = {
       submit: "Submit My Experience",
       moderationNote: "Reviews are published only after the ShopeMoon team reviews them.",
       rewardNote: "After submitting your experience, your next-purchase discount code will be sent to you via WhatsApp.",
+      teaserTitle: "🎁 Your ShopeMoon Experience",
+      teaserDesc: "If you were happy with your purchase, send a photo, your feedback, and your experience to get a discount code or reward points on your next order.",
+      teaserCta: "Share My Experience",
+      teaserLater: "Later",
     },
     products: {
       title: "Product Categories",
@@ -406,6 +418,10 @@ const turkishDictionary = {
     submit: "Deneyimimi Gönder",
     moderationNote: "Yorumlar yalnızca ShopeMoon ekibi tarafından incelendikten sonra yayınlanır.",
     rewardNote: "Deneyiminizi gönderdiğinizde, bir sonraki alışverişiniz için indirim kodu WhatsApp üzerinden size gönderilir.",
+    teaserTitle: "🎁 ShopeMoon Deneyiminiz",
+    teaserDesc: "Alışverişinizden memnun kaldıysanız; bir fotoğraf, yorumunuz ve deneyiminizi göndererek bir sonraki siparişiniz için indirim kodu veya ödül puanı kazanın.",
+    teaserCta: "Deneyimimi Paylaş",
+    teaserLater: "Sonra",
   },
   products: {
     title: "Ürün Kategorileri",
