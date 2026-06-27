@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { AppProviders } from "@/context/providers";
+import { VoiceWidget } from "@/components/VoiceWidget";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,14 +20,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// action-text / start-call-text are not real attributes — the actual
-// widget core (verified against its published source) only reads a
-// text-contents JSON attribute, with keys main_label and start_call.
-const elevenLabsTextContents = JSON.stringify({
-  main_label: "هر سوالی داری از من بپرس",
-  start_call: "شروع تماس صوتی",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -35,11 +27,7 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body className="bg-cream text-navy dark:bg-navy-dark dark:text-cream transition-colors duration-300">
         <AppProviders>{children}</AppProviders>
-        <elevenlabs-convai
-          agent-id="agent_1301kvzjfw9xed4vt4t83qd5md2k"
-          text-contents={elevenLabsTextContents}
-        ></elevenlabs-convai>
-        <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="afterInteractive" async />
+        <VoiceWidget />
       </body>
     </html>
   );
