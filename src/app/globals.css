@@ -46,21 +46,30 @@ a:focus-visible .tooltip {
   opacity: 1;
 }
 
-/* ElevenLabs ConvAI voice widget: pin bottom-right and shrink on mobile so
-   it stays tappable without covering hero CTAs/trust badges. The widget
-   renders its host element in light DOM with an open shadow root inside —
-   transform/position on the host element itself is not shadow-encapsulated,
-   so this works without needing a wrapper div. */
-elevenlabs-convai {
+/* ElevenLabs ConvAI voice widget: the wrapper div (not the custom element
+   itself) owns fixed positioning + scaling. The custom element is forced to
+   static/relative inside it so there's only one source of truth for the
+   widget's screen position. pointer-events is disabled on the wrapper and
+   re-enabled on the element so the wrapper's box (which transform does not
+   shrink for hit-testing purposes the same way it shrinks paint in every
+   browser) never blocks clicks on whatever is underneath it. */
+.elevenlabs-widget-wrapper {
   position: fixed !important;
   right: 16px !important;
   bottom: 16px !important;
-  z-index: 50 !important;
+  z-index: 60 !important;
+  pointer-events: none !important;
+}
+
+.elevenlabs-widget-wrapper elevenlabs-convai {
+  position: static !important;
+  display: block !important;
+  pointer-events: auto !important;
 }
 
 @media (max-width: 768px) {
-  elevenlabs-convai {
-    transform: scale(0.55) !important;
+  .elevenlabs-widget-wrapper {
+    transform: scale(0.25) !important;
     transform-origin: bottom right !important;
     right: 8px !important;
     bottom: 8px !important;

@@ -42,13 +42,15 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body className="bg-cream text-navy dark:bg-navy-dark dark:text-cream transition-colors duration-300">
         <AppProviders>{children}</AppProviders>
-        <elevenlabs-convai
-          agent-id="agent_1301kvzjfw9xed4vt4t83qd5md2k"
-          placement="bottom-right"
-          text-contents={elevenLabsTextContents}
-          avatar-orb-color-1="#c9a25d"
-          avatar-orb-color-2="#f7f1e6"
-        ></elevenlabs-convai>
+        <div className="elevenlabs-widget-wrapper">
+          <elevenlabs-convai
+            agent-id="agent_1301kvzjfw9xed4vt4t83qd5md2k"
+            placement="bottom-right"
+            text-contents={elevenLabsTextContents}
+            avatar-orb-color-1="#c9a25d"
+            avatar-orb-color-2="#f7f1e6"
+          ></elevenlabs-convai>
+        </div>
         <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="afterInteractive" async />
       </body>
     </html>
