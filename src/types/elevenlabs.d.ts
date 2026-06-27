@@ -5,6 +5,8 @@ declare global {
     interface IntrinsicElements {
       "elevenlabs-convai": DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
         "agent-id"?: string;
+        "action-text"?: string;
+        "start-call-text"?: string;
       };
     }
   }
