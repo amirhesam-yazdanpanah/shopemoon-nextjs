@@ -30,9 +30,21 @@ interface ExperienceModalContextValue {
   closeModal: () => void;
 }
 
+interface MembershipModalContextValue {
+  isOpen: boolean;
+  openModal: () => void;
+  closeModal: () => void;
+  // True once the membership popup has either been shown-and-dismissed or
+  // determined it won't show this visit (suppressed). ExperienceModal's
+  // auto-trigger waits on this so the two popups never race/overlap.
+  promptResolved: boolean;
+  resolvePrompt: () => void;
+}
+
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 const ExperienceModalContext = createContext<ExperienceModalContextValue | null>(null);
+const MembershipModalContext = createContext<MembershipModalContextValue | null>(null);
 
 export function useTheme() {
   const ctx = useContext(ThemeContext);
@@ -52,10 +64,18 @@ export function useExperienceModal() {
   return ctx;
 }
 
+export function useMembershipModal() {
+  const ctx = useContext(MembershipModalContext);
+  if (!ctx) throw new Error("useMembershipModal must be used within AppProviders");
+  return ctx;
+}
+
 export function AppProviders({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
   const [locale, setLocale] = useState<Locale>("fa");
   const [isExperienceModalOpen, setIsExperienceModalOpen] = useState(false);
+  const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
+  const [membershipPromptResolved, setMembershipPromptResolved] = useState(false);
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem("sm-theme") as Theme | null;
@@ -86,6 +106,10 @@ export function AppProviders({ children }: { children: ReactNode }) {
   const openModal = useCallback(() => setIsExperienceModalOpen(true), []);
   const closeModal = useCallback(() => setIsExperienceModalOpen(false), []);
 
+  const openMembershipModal = useCallback(() => setIsMembershipModalOpen(true), []);
+  const closeMembershipModal = useCallback(() => setIsMembershipModalOpen(false), []);
+  const resolveMembershipPrompt = useCallback(() => setMembershipPromptResolved(true), []);
+
   const themeValue = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
   const localeValue = useMemo(
     () => ({ locale, dict: dictionary[locale], selectLocale }),
@@ -95,12 +119,24 @@ export function AppProviders({ children }: { children: ReactNode }) {
     () => ({ isOpen: isExperienceModalOpen, openModal, closeModal }),
     [isExperienceModalOpen, openModal, closeModal]
   );
+  const membershipModalValue = useMemo(
+    () => ({
+      isOpen: isMembershipModalOpen,
+      openModal: openMembershipModal,
+      closeModal: closeMembershipModal,
+      promptResolved: membershipPromptResolved,
+      resolvePrompt: resolveMembershipPrompt,
+    }),
+    [isMembershipModalOpen, openMembershipModal, closeMembershipModal, membershipPromptResolved, resolveMembershipPrompt]
+  );
 
   return (
     <ThemeContext.Provider value={themeValue}>
       <LocaleContext.Provider value={localeValue}>
         <ExperienceModalContext.Provider value={experienceModalValue}>
-          {children}
+          <MembershipModalContext.Provider value={membershipModalValue}>
+            {children}
+          </MembershipModalContext.Provider>
         </ExperienceModalContext.Provider>
       </LocaleContext.Provider>
     </ThemeContext.Provider>

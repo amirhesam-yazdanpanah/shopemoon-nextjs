@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { TrustBadges } from "@/components/TrustBadges";
+import { MembershipModal } from "@/components/MembershipModal";
 import { ExperienceModal } from "@/components/ExperienceModal";
 import { About } from "@/components/About";
 import { ProductShowcase } from "@/components/ProductShowcase";
@@ -23,6 +24,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <MembershipModal />
       <ExperienceModal />
     </>
   );

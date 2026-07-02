@@ -132,6 +132,13 @@ export interface LocaleDictionary {
     successMessage: string;
     errorMessage: string;
   };
+  membershipModal: {
+    teaserTitle: string;
+    teaserDesc: string;
+    submit: string;
+    teaserLater: string;
+    successMessage: string;
+  };
   experience: {
     title: string;
     intro: string;
@@ -253,6 +260,13 @@ const translatedDictionary = {
       successMessage: "عضویت شما با موفقیت ثبت شد 🌙\nکد تخفیف ۱۰٪ اولین خرید از طریق واتساپ برای شما ارسال می‌شود.",
       errorMessage: "ارسال فرم با مشکل مواجه شد. لطفاً دوباره تلاش کنید یا از طریق واتساپ با ما در ارتباط باشید.",
     },
+    membershipModal: {
+      teaserTitle: "عضو شاپمون شو 🎁",
+      teaserDesc: "و در اولین خریدت ۱۰٪ تخفیف هدیه بگیر.",
+      submit: "ثبت عضویت",
+      teaserLater: "بعداً",
+      successMessage: "عضویت شما با موفقیت ثبت شد. کد تخفیف اولین خرید برای شما ارسال می‌شود.",
+    },
     faq: {
       title: "سوالات متداول",
       items: [
@@ -370,6 +384,13 @@ const translatedDictionary = {
       submitting: "Sending...",
       successMessage: "Your membership was submitted successfully 🌙\nYour 10% first-purchase discount code will be sent via WhatsApp.",
       errorMessage: "Something went wrong sending the form. Please try again or reach us on WhatsApp.",
+    },
+    membershipModal: {
+      teaserTitle: "Join ShopeMoon 🎁",
+      teaserDesc: "Get a 10% discount gift on your first purchase.",
+      submit: "Join Now",
+      teaserLater: "Later",
+      successMessage: "Your membership was submitted successfully. Your first-purchase discount code will be sent to you.",
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -490,6 +511,13 @@ const turkishDictionary = {
     submitting: "Gönderiliyor...",
     successMessage: "Üyeliğiniz başarıyla alındı 🌙\nİlk alışverişinize özel %10 indirim kodunuz WhatsApp üzerinden gönderilecek.",
     errorMessage: "Form gönderilirken bir sorun oluştu. Lütfen tekrar deneyin ya da WhatsApp üzerinden bizimle iletişime geçin.",
+  },
+  membershipModal: {
+    teaserTitle: "ShopeMoon'a Üye Ol 🎁",
+    teaserDesc: "İlk alışverişine özel %10 indirim hediyesi kazan.",
+    submit: "Üyeliği Tamamla",
+    teaserLater: "Sonra",
+    successMessage: "Üyeliğiniz başarıyla alındı. İlk alışveriş indirim kodunuz size gönderilecek.",
   },
   faq: {
     title: "Sıkça Sorulan Sorular",

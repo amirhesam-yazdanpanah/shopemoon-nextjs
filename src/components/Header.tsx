@@ -1,21 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { useExperienceModal, useLocale, useTheme } from "@/context/providers";
+import { useExperienceModal, useMembershipModal, useLocale, useTheme } from "@/context/providers";
 import { ThemeToggle, MoonIcon, SunIcon } from "./ThemeToggle";
 import { LanguageToggle } from "./LanguageToggle";
 
 export function Header() {
   const { dict } = useLocale();
   const { openModal } = useExperienceModal();
+  const { closeModal: closeMembershipModal } = useMembershipModal();
   const { theme, toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
+
+  function openExperienceModal() {
+    closeMembershipModal();
+    openModal();
+  }
 
   const links: { href?: string; label: string; action?: () => void }[] = [
     { href: "#hero", label: dict.nav.home },
     { href: "#about", label: dict.nav.about },
     { href: "#products", label: dict.nav.products },
-    { label: dict.nav.experience, action: openModal },
+    { label: dict.nav.experience, action: openExperienceModal },
     { href: "#membership", label: dict.nav.membership },
     { href: "#faq", label: dict.nav.faq },
     { href: "#contact", label: dict.nav.contact },

@@ -1,13 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useExperienceModal, useMembershipModal, useLocale } from "@/context/providers";
-import { ExperienceForm } from "./ExperienceForm";
+import { useMembershipModal, useLocale } from "@/context/providers";
+import { MembershipPopupForm } from "./MembershipPopupForm";
 
-const STORAGE_KEY = "sm-experience-modal-until";
-const SUPPRESS_DAYS = 7;
-const SCROLL_TRIGGER_RATIO = 0.5;
-const TIME_TRIGGER_MS = 15000;
+const STORAGE_KEY = "sm-membership-modal-until";
+const SUPPRESS_DAYS = 30;
+const TIME_TRIGGER_MS = 2000;
 
 function isSuppressed() {
   const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -21,46 +20,34 @@ function suppressForDays(days: number) {
   window.localStorage.setItem(STORAGE_KEY, String(until));
 }
 
-export function ExperienceModal() {
+export function MembershipModal() {
   const { dict, locale } = useLocale();
-  const { isOpen, openModal, closeModal } = useExperienceModal();
-  const { promptResolved: membershipPromptResolved } = useMembershipModal();
+  const { isOpen, openModal, closeModal, resolvePrompt } = useMembershipModal();
   const [visible, setVisible] = useState(false);
   const autoTriggeredRef = useRef(false);
 
-  // Automatic trigger: 15s timer OR 50% scroll, whichever fires first —
-  // gated by the 7-day localStorage suppression window. A manual open via
-  // the navbar button (openModal from context) bypasses this entirely.
-  const triggerAutoOpen = useCallback(() => {
-    if (autoTriggeredRef.current || isSuppressed()) return;
-    autoTriggeredRef.current = true;
-    suppressForDays(SUPPRESS_DAYS);
-    openModal();
-  }, [openModal]);
-
-  // This is the SECOND popup: it must never appear before or alongside the
-  // membership popup, so the auto-trigger stays fully disarmed (no timer,
-  // no scroll listener) until membershipPromptResolved flips true.
+  // This is the FIRST popup a visitor sees. It fires shortly after page
+  // load (no scroll gating, unlike the experience popup) and, once it
+  // resolves (dismissed or submitted), signals resolvePrompt() so the
+  // experience popup's own auto-trigger is allowed to start. If it's
+  // suppressed (already shown recently), resolve immediately so the
+  // experience popup isn't stuck waiting on a popup that will never show.
   useEffect(() => {
-    if (isSuppressed() || !membershipPromptResolved) return;
-
-    const timer = window.setTimeout(triggerAutoOpen, TIME_TRIGGER_MS);
-
-    function handleScroll() {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      if (window.scrollY / scrollable >= SCROLL_TRIGGER_RATIO) {
-        triggerAutoOpen();
-      }
+    if (isSuppressed()) {
+      resolvePrompt();
+      return;
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const timer = window.setTimeout(() => {
+      if (autoTriggeredRef.current) return;
+      autoTriggeredRef.current = true;
+      suppressForDays(SUPPRESS_DAYS);
+      openModal();
+    }, TIME_TRIGGER_MS);
 
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [triggerAutoOpen, membershipPromptResolved]);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -70,10 +57,13 @@ export function ExperienceModal() {
     setVisible(false);
   }, [isOpen]);
 
-  function close() {
+  const close = useCallback(() => {
     setVisible(false);
-    window.setTimeout(closeModal, 200);
-  }
+    window.setTimeout(() => {
+      closeModal();
+      resolvePrompt();
+    }, 200);
+  }, [closeModal, resolvePrompt]);
 
   if (!isOpen) return null;
 
@@ -104,14 +94,14 @@ export function ExperienceModal() {
         </button>
 
         <div className="text-center">
-          <h2 className="mt-2 text-2xl font-bold sm:text-3xl">{dict.experience.teaserTitle}</h2>
+          <h2 className="mt-2 text-2xl font-bold sm:text-3xl">{dict.membershipModal.teaserTitle}</h2>
           <p className="mx-auto mt-4 max-w-sm whitespace-pre-line leading-relaxed text-navy-soft dark:text-cream-dark">
-            {dict.experience.teaserDesc}
+            {dict.membershipModal.teaserDesc}
           </p>
         </div>
 
         <div className="mt-8">
-          <ExperienceForm onSubmitted={close} />
+          <MembershipPopupForm onSubmitted={close} />
         </div>
 
         <div className="mt-4 text-center">
@@ -120,7 +110,7 @@ export function ExperienceModal() {
             onClick={close}
             className="text-sm font-semibold text-navy-soft underline-offset-2 transition hover:text-gold hover:underline dark:text-cream-dark"
           >
-            {dict.experience.teaserLater}
+            {dict.membershipModal.teaserLater}
           </button>
         </div>
       </div>
