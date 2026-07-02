@@ -118,8 +118,19 @@ export interface LocaleDictionary {
       details: string;
       address: string;
       addressPlaceholder: string;
+      gender: string;
+      genderPlaceholder: string;
+      genderOptions: { female: string; male: string; preferNotToSay: string };
+      birthDate: string;
+      birthDatePlaceholder: string;
+      birthDateInvalidError: string;
+      birthDateFutureError: string;
+      whatsappInvalidError: string;
     };
     submit: string;
+    submitting: string;
+    successMessage: string;
+    errorMessage: string;
   };
   experience: {
     title: string;
@@ -228,8 +239,19 @@ const translatedDictionary = {
         details: "توضیحات / درخواست خرید",
         address: "آدرس",
         addressPlaceholder: "آدرس خود را وارد کنید",
+        gender: "جنسیت",
+        genderPlaceholder: "جنسیت خود را انتخاب کنید",
+        genderOptions: { female: "خانم", male: "آقا", preferNotToSay: "ترجیح می‌دهم نگویم" },
+        birthDate: "تاریخ تولد",
+        birthDatePlaceholder: "تاریخ تولد خود را وارد کنید",
+        birthDateInvalidError: "تاریخ تولد وارد شده معتبر نیست.",
+        birthDateFutureError: "تاریخ تولد نمی‌تواند در آینده باشد.",
+        whatsappInvalidError: "شماره واتساپ وارد شده معتبر نیست.",
       },
       submit: "ارسال و عضویت",
+      submitting: "در حال ارسال...",
+      successMessage: "عضویت شما با موفقیت ثبت شد 🌙\nکد تخفیف ۱۰٪ اولین خرید از طریق واتساپ برای شما ارسال می‌شود.",
+      errorMessage: "ارسال فرم با مشکل مواجه شد. لطفاً دوباره تلاش کنید یا از طریق واتساپ با ما در ارتباط باشید.",
     },
     faq: {
       title: "سوالات متداول",
@@ -335,8 +357,19 @@ const translatedDictionary = {
         details: "Details / Purchase Request",
         address: "Address",
         addressPlaceholder: "Enter your address",
+        gender: "Gender",
+        genderPlaceholder: "Select your gender",
+        genderOptions: { female: "Female", male: "Male", preferNotToSay: "Prefer not to say" },
+        birthDate: "Date of Birth",
+        birthDatePlaceholder: "Enter your date of birth",
+        birthDateInvalidError: "The date of birth entered is not valid.",
+        birthDateFutureError: "Date of birth cannot be in the future.",
+        whatsappInvalidError: "The WhatsApp number entered is not valid.",
       },
       submit: "Submit & Join",
+      submitting: "Sending...",
+      successMessage: "Your membership was submitted successfully 🌙\nYour 10% first-purchase discount code will be sent via WhatsApp.",
+      errorMessage: "Something went wrong sending the form. Please try again or reach us on WhatsApp.",
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -444,8 +477,19 @@ const turkishDictionary = {
       details: "Detaylar / Satın Alma Talebi",
       address: "Adres",
       addressPlaceholder: "Adresinizi girin",
+      gender: "Cinsiyet",
+      genderPlaceholder: "Cinsiyetinizi seçin",
+      genderOptions: { female: "Kadın", male: "Erkek", preferNotToSay: "Belirtmek istemiyorum" },
+      birthDate: "Doğum Tarihi",
+      birthDatePlaceholder: "Doğum tarihinizi girin",
+      birthDateInvalidError: "Girilen doğum tarihi geçerli değil.",
+      birthDateFutureError: "Doğum tarihi gelecekte olamaz.",
+      whatsappInvalidError: "Girilen WhatsApp numarası geçerli değil.",
     },
     submit: "Gönder ve Üye Ol",
+    submitting: "Gönderiliyor...",
+    successMessage: "Üyeliğiniz başarıyla alındı 🌙\nİlk alışverişinize özel %10 indirim kodunuz WhatsApp üzerinden gönderilecek.",
+    errorMessage: "Form gönderilirken bir sorun oluştu. Lütfen tekrar deneyin ya da WhatsApp üzerinden bizimle iletişime geçin.",
   },
   faq: {
     title: "Sıkça Sorulan Sorular",

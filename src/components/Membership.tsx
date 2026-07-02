@@ -2,23 +2,83 @@
 
 import { useState, type FormEvent } from "react";
 import { useLocale } from "@/context/providers";
-import { whatsappLink } from "@/lib/dictionary";
+
+function isValidDateString(value: string) {
+  const date = new Date(value);
+  return !Number.isNaN(date.getTime());
+}
+
+function isFutureDate(value: string) {
+  const date = new Date(value);
+  const today = new Date();
+  today.setHours(23, 59, 59, 999);
+  return date.getTime() > today.getTime();
+}
+
+function isValidWhatsAppNumber(value: string) {
+  if (!/^[\d\s+()-]+$/.test(value)) return false;
+  const digits = value.replace(/\D/g, "");
+  return digits.length >= 8 && digits.length <= 15;
+}
+
+type SubmitStatus = "idle" | "success" | "error";
+
+const initialForm = {
+  name: "",
+  whatsapp: "",
+  brands: "",
+  details: "",
+  address: "",
+  gender: "",
+  birthDate: "",
+};
 
 export function Membership() {
   const { dict } = useLocale();
-  const [form, setForm] = useState({ name: "", whatsapp: "", brands: "", details: "", address: "" });
+  const [form, setForm] = useState(initialForm);
+  const [whatsappError, setWhatsappError] = useState("");
+  const [birthDateError, setBirthDateError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus>("idle");
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const message = [
-      dict.membership.title,
-      `${dict.membership.fields.name}: ${form.name}`,
-      `${dict.membership.fields.whatsapp}: ${form.whatsapp}`,
-      `${dict.membership.fields.brands}: ${form.brands || "-"}`,
-      `${dict.membership.fields.address}: ${form.address || "-"}`,
-      `${dict.membership.fields.details}: ${form.details || "-"}`,
-    ].join("\n");
-    window.open(whatsappLink(message), "_blank", "noopener");
+    if (submitting) return;
+
+    if (!isValidWhatsAppNumber(form.whatsapp)) {
+      setWhatsappError(dict.membership.fields.whatsappInvalidError);
+      return;
+    }
+    setWhatsappError("");
+
+    if (form.birthDate) {
+      if (!isValidDateString(form.birthDate)) {
+        setBirthDateError(dict.membership.fields.birthDateInvalidError);
+        return;
+      }
+      if (isFutureDate(form.birthDate)) {
+        setBirthDateError(dict.membership.fields.birthDateFutureError);
+        return;
+      }
+    }
+    setBirthDateError("");
+
+    setSubmitting(true);
+    setStatus("idle");
+    try {
+      const response = await fetch("/api/membership", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error("Membership submission failed");
+      setStatus("success");
+      setForm(initialForm);
+    } catch {
+      setStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const inputClass =
@@ -58,9 +118,19 @@ export function Membership() {
               type="tel"
               required
               value={form.whatsapp}
-              onChange={(e) => setForm((f) => ({ ...f, whatsapp: e.target.value }))}
+              onChange={(e) => {
+                setWhatsappError("");
+                setForm((f) => ({ ...f, whatsapp: e.target.value }));
+              }}
+              aria-invalid={Boolean(whatsappError)}
+              aria-describedby={whatsappError ? "whatsapp-error" : undefined}
               className={inputClass}
             />
+            {whatsappError ? (
+              <p id="whatsapp-error" className="text-xs font-semibold text-red-600">
+                {whatsappError}
+              </p>
+            ) : null}
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2">
@@ -90,6 +160,50 @@ export function Membership() {
             </div>
           </div>
 
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-2">
+              <label htmlFor="gender" className="text-sm font-semibold">
+                {dict.membership.fields.gender}
+              </label>
+              <select
+                id="gender"
+                value={form.gender}
+                onChange={(e) => setForm((f) => ({ ...f, gender: e.target.value }))}
+                className={inputClass}
+              >
+                <option value="">{dict.membership.fields.genderPlaceholder}</option>
+                <option value="female">{dict.membership.fields.genderOptions.female}</option>
+                <option value="male">{dict.membership.fields.genderOptions.male}</option>
+                <option value="preferNotToSay">{dict.membership.fields.genderOptions.preferNotToSay}</option>
+              </select>
+            </div>
+
+            <div className="grid gap-2">
+              <label htmlFor="birthDate" className="text-sm font-semibold">
+                {dict.membership.fields.birthDate}
+              </label>
+              <input
+                id="birthDate"
+                type="date"
+                value={form.birthDate}
+                max={new Date().toISOString().split("T")[0]}
+                onChange={(e) => {
+                  setBirthDateError("");
+                  setForm((f) => ({ ...f, birthDate: e.target.value }));
+                }}
+                placeholder={dict.membership.fields.birthDatePlaceholder}
+                aria-invalid={Boolean(birthDateError)}
+                aria-describedby={birthDateError ? "birthDate-error" : undefined}
+                className={inputClass}
+              />
+              {birthDateError ? (
+                <p id="birthDate-error" className="text-xs font-semibold text-red-600">
+                  {birthDateError}
+                </p>
+              ) : null}
+            </div>
+          </div>
+
           <div className="grid gap-2">
             <label htmlFor="details" className="text-sm font-semibold">
               {dict.membership.fields.details}
@@ -105,10 +219,22 @@ export function Membership() {
 
           <button
             type="submit"
-            className="mt-2 rounded-full bg-gradient-to-br from-gold to-gold-light px-8 py-4 text-base font-bold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft"
+            disabled={submitting}
+            className="mt-2 rounded-full bg-gradient-to-br from-gold to-gold-light px-8 py-4 text-base font-bold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {dict.membership.submit}
+            {submitting ? dict.membership.submitting : dict.membership.submit}
           </button>
+
+          {status === "success" ? (
+            <p className="whitespace-pre-line text-center text-sm font-semibold text-gold" role="status">
+              {dict.membership.successMessage}
+            </p>
+          ) : null}
+          {status === "error" ? (
+            <p className="text-center text-sm font-semibold text-red-600" role="alert">
+              {dict.membership.errorMessage}
+            </p>
+          ) : null}
         </form>
       </div>
     </section>
