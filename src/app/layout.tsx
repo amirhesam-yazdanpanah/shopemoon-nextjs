@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/context/providers";
-import { VoiceWidget } from "@/components/VoiceWidget";
+import { VoiceWidgetLoader } from "@/components/VoiceWidgetLoader";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className="bg-cream text-navy dark:bg-navy-dark dark:text-cream transition-colors duration-300">
         <AppProviders>
           {children}
-          <VoiceWidget />
+          <VoiceWidgetLoader />
         </AppProviders>
       </body>
     </html>
