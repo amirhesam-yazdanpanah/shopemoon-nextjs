@@ -26,8 +26,10 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body className="bg-cream text-navy dark:bg-navy-dark dark:text-cream transition-colors duration-300">
-        <AppProviders>{children}</AppProviders>
-        <VoiceWidget />
+        <AppProviders>
+          {children}
+          <VoiceWidget />
+        </AppProviders>
       </body>
     </html>
   );
