@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "@/context/providers";
-import { whatsappLink } from "@/lib/dictionary";
+import { telegramChannelLink } from "@/lib/dictionary";
 
 export function Contact() {
   const { dict } = useLocale();
@@ -14,7 +14,7 @@ export function Contact() {
           {dict.contact.desc}
         </p>
         <a
-          href={whatsappLink(dict.hero.whatsappMessage)}
+          href={telegramChannelLink}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-8 inline-flex rounded-full bg-gradient-to-br from-gold to-gold-light px-10 py-4 text-base font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-lg"

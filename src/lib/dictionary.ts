@@ -1,10 +1,6 @@
 export type Locale = "fa" | "en" | "tr";
 
-export const whatsappNumber = "989109798803";
-
-export function whatsappLink(message: string) {
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-}
+export const telegramChannelLink = "https://t.me/shopeemonn";
 
 export interface BrandLink {
   name: string;
@@ -96,7 +92,6 @@ export interface LocaleDictionary {
     subtitle: string;
     ctaPrimary: string;
     ctaSecondary: string;
-    whatsappMessage: string;
     trustIndicators: string[];
   };
   trust: {
@@ -113,7 +108,7 @@ export interface LocaleDictionary {
     desc: string;
     fields: {
       name: string;
-      whatsapp: string;
+      phone: string;
       brands: string;
       details: string;
       address: string;
@@ -125,7 +120,7 @@ export interface LocaleDictionary {
       birthDatePlaceholder: string;
       birthDateInvalidError: string;
       birthDateFutureError: string;
-      whatsappInvalidError: string;
+      phoneInvalidError: string;
     };
     submit: string;
     submitting: string;
@@ -144,7 +139,7 @@ export interface LocaleDictionary {
     intro: string;
     fields: {
       name: string;
-      whatsapp: string;
+      phone: string;
       product: string;
       rating: string;
       feedback: string;
@@ -195,10 +190,9 @@ const translatedDictionary = {
       eyebrow: "ShopeMoon",
       title: "خرید مستقیم از برندهای اورجینال",
       subtitle: "خرید حضوری و آنلاین از فروشگاه‌های معتبر ترکیه و اروپا",
-      ctaPrimary: "پیام در واتساپ",
+      ctaPrimary: "پیام در تلگرام",
       ctaSecondary: "مشاهده فروشگاه‌ها",
-      whatsappMessage: "سلام، برای خرید از برندهای اورجینال راهنمایی می‌خواستم.",
-      trustIndicators: ["ضمانت اصالت کالا", "پاسخگویی سریع در واتساپ", "ارسال مطمئن"],
+      trustIndicators: ["ضمانت اصالت کالا", "پاسخگویی سریع در تلگرام", "ارسال مطمئن"],
     },
     trust: {
       title: "مراحل خرید در شاپمون",
@@ -214,7 +208,7 @@ const translatedDictionary = {
       intro: "تجربه خریدت با شاپمون رو با ما به اشتراک بذار؛ با ارسال عکس، نظر و رضایتت، برای خرید بعدی امتیاز یا تخفیف دریافت می‌کنی.",
       fields: {
         name: "نام و نام خانوادگی",
-        whatsapp: "شماره واتساپ",
+        phone: "شماره تلفن",
         product: "نام برند یا محصولی که خریدی",
         rating: "امتیاز خرید از ۱ تا ۵",
         feedback: "متن رضایت یا تجربه خرید",
@@ -222,7 +216,7 @@ const translatedDictionary = {
       },
       submit: "ثبت تجربه خرید",
       moderationNote: "نظرات پس از بررسی تیم شاپمون منتشر خواهند شد.",
-      rewardNote: "با ارسال تجربه خرید، کد تخفیف خرید بعدی برای شما از طریق واتساپ ارسال می‌شود.",
+      rewardNote: "با ارسال تجربه خرید، کد تخفیف خرید بعدی برای شما ارسال می‌شود.",
       teaserTitle: "🎁 تجربه خرید با شاپمون",
       teaserDesc: "اگر از خریدت راضی بودی،\nبا ارسال عکس، نظر و تجربه خریدت،\nبرای خرید بعدی کد تخفیف یا امتیاز هدیه دریافت کن.",
       teaserLater: "بعداً",
@@ -241,7 +235,7 @@ const translatedDictionary = {
       desc: "با عضویت در ShopeMoon می‌توانید درخواست‌های خرید، برندهای مورد علاقه و اطلاعات تماس خود را ثبت کنید تا در زمان نیاز سریع‌تر راهنمایی شوید.",
       fields: {
         name: "نام و نام خانوادگی",
-        whatsapp: "شماره واتساپ",
+        phone: "شماره تلفن",
         brands: "برندهای مورد علاقه",
         details: "توضیحات / درخواست خرید",
         address: "آدرس",
@@ -253,12 +247,12 @@ const translatedDictionary = {
         birthDatePlaceholder: "تاریخ تولد خود را وارد کنید",
         birthDateInvalidError: "تاریخ تولد وارد شده معتبر نیست.",
         birthDateFutureError: "تاریخ تولد نمی‌تواند در آینده باشد.",
-        whatsappInvalidError: "شماره واتساپ وارد شده معتبر نیست.",
+        phoneInvalidError: "شماره تلفن وارد شده معتبر نیست.",
       },
       submit: "ارسال و عضویت",
       submitting: "در حال ارسال...",
-      successMessage: "عضویت شما با موفقیت ثبت شد 🌙\nکد تخفیف ۱۰٪ اولین خرید از طریق واتساپ برای شما ارسال می‌شود.",
-      errorMessage: "ارسال فرم با مشکل مواجه شد. لطفاً دوباره تلاش کنید یا از طریق واتساپ با ما در ارتباط باشید.",
+      successMessage: "عضویت شما با موفقیت ثبت شد 🌙\nکد تخفیف ۱۰٪ اولین خرید به‌زودی برای شما ارسال می‌شود.",
+      errorMessage: "ارسال فرم با مشکل مواجه شد. لطفاً دوباره تلاش کنید یا از طریق تلگرام با ما در ارتباط باشید.",
     },
     membershipModal: {
       teaserTitle: "عضو شاپمون شو 🎁",
@@ -273,13 +267,13 @@ const translatedDictionary = {
         { q: "آیا کالاها اورجینال هستند؟", a: "بله، تمام خریدها مستقیم از فروشگاه‌های رسمی برندها انجام می‌شود." },
         { q: "هزینه ارسال چقدر است؟", a: "هزینه ارسال بر اساس مقصد و وزن کالا محاسبه و پیش از پرداخت اعلام می‌شود." },
         { q: "چقدر طول می‌کشد سفارش برسد؟", a: "زمان تقریبی ارسال بسته به کشور مبدا و مقصد متفاوت است و در زمان استعلام اعلام می‌شود." },
-        { q: "چطور سفارش ثبت کنم؟", a: "کافی است از طریق واتساپ لینک، عکس یا نام محصول را برای ما ارسال کنید." },
+        { q: "چطور سفارش ثبت کنم؟", a: "کافی است از طریق تلگرام لینک، عکس یا نام محصول را برای ما ارسال کنید." },
       ],
     },
     contact: {
       title: "تماس با ما",
-      desc: "برای هرگونه سوال یا ثبت سفارش از طریق واتساپ با ما در ارتباط باشید.",
-      cta: "شروع گفتگو در واتساپ",
+      desc: "برای هرگونه سوال یا ثبت سفارش از طریق تلگرام با ما در ارتباط باشید.",
+      cta: "شروع گفتگو در تلگرام",
     },
     footer: {
       tagline: "خرید امن از برندهای اصلی ترکیه و اروپا",
@@ -319,10 +313,9 @@ const translatedDictionary = {
       eyebrow: "ShopeMoon",
       title: "Buy Direct From Original Brands",
       subtitle: "In-person and online shopping from trusted Turkish and European retailers",
-      ctaPrimary: "Message on WhatsApp",
+      ctaPrimary: "Message on Telegram",
       ctaSecondary: "View Stores",
-      whatsappMessage: "Hi, I'd like guidance on buying original brand products.",
-      trustIndicators: ["Authenticity guaranteed", "Fast WhatsApp replies", "Reliable delivery"],
+      trustIndicators: ["Authenticity guaranteed", "Fast Telegram replies", "Reliable delivery"],
     },
     trust: {
       title: "Shopping Steps with ShopeMoon",
@@ -338,7 +331,7 @@ const translatedDictionary = {
       intro: "Share your ShopeMoon shopping experience with us — send a photo, your feedback, and your satisfaction to earn points or a discount on your next purchase.",
       fields: {
         name: "Full Name",
-        whatsapp: "WhatsApp Number",
+        phone: "Phone Number",
         product: "Brand or product you purchased",
         rating: "Rate your purchase from 1 to 5",
         feedback: "Your feedback or shopping experience",
@@ -346,7 +339,7 @@ const translatedDictionary = {
       },
       submit: "Submit My Experience",
       moderationNote: "Reviews will be published after the ShopeMoon team reviews them.",
-      rewardNote: "After submitting your experience, your next-purchase discount code will be sent to you via WhatsApp.",
+      rewardNote: "After submitting your experience, your next-purchase discount code will be sent to you.",
       teaserTitle: "🎁 Your ShopeMoon Experience",
       teaserDesc:
         "If you were happy with your purchase,\nsend a photo, your feedback, and your experience\nto get a discount code or reward points on your next order.",
@@ -366,7 +359,7 @@ const translatedDictionary = {
       desc: "Become a member to save your purchase requests, favorite brands, and contact details for faster assistance.",
       fields: {
         name: "Full Name",
-        whatsapp: "WhatsApp Number",
+        phone: "Phone Number",
         brands: "Favorite Brands",
         details: "Details / Purchase Request",
         address: "Address",
@@ -378,12 +371,12 @@ const translatedDictionary = {
         birthDatePlaceholder: "Enter your date of birth",
         birthDateInvalidError: "The date of birth entered is not valid.",
         birthDateFutureError: "Date of birth cannot be in the future.",
-        whatsappInvalidError: "The WhatsApp number entered is not valid.",
+        phoneInvalidError: "The phone number entered is not valid.",
       },
       submit: "Submit & Join",
       submitting: "Sending...",
-      successMessage: "Your membership was submitted successfully 🌙\nYour 10% first-purchase discount code will be sent via WhatsApp.",
-      errorMessage: "Something went wrong sending the form. Please try again or reach us on WhatsApp.",
+      successMessage: "Your membership was submitted successfully 🌙\nYour 10% first-purchase discount code will be sent to you soon.",
+      errorMessage: "Something went wrong sending the form. Please try again or reach us on Telegram.",
     },
     membershipModal: {
       teaserTitle: "Join ShopeMoon 🎁",
@@ -398,13 +391,13 @@ const translatedDictionary = {
         { q: "Are the products original?", a: "Yes, all purchases are made directly from official brand stores." },
         { q: "What about shipping cost?", a: "Shipping cost depends on destination and weight, confirmed before payment." },
         { q: "How long does delivery take?", a: "Delivery time varies by origin and destination, shared at order confirmation." },
-        { q: "How do I place an order?", a: "Simply send us a link, photo, or product name via WhatsApp." },
+        { q: "How do I place an order?", a: "Simply send us a link, photo, or product name via Telegram." },
       ],
     },
     contact: {
       title: "Contact Us",
-      desc: "Reach out via WhatsApp for any questions or to place an order.",
-      cta: "Start chat on WhatsApp",
+      desc: "Reach out via Telegram for any questions or to place an order.",
+      cta: "Start chat on Telegram",
     },
     footer: {
       tagline: "Secure shopping from authentic Turkish and European brands",
@@ -446,10 +439,9 @@ const turkishDictionary = {
     eyebrow: "ShopeMoon",
     title: "Orijinal Markalardan Doğrudan Alışveriş",
     subtitle: "Güvenilir Türk ve Avrupa mağazalarından yüz yüze ve online alışveriş",
-    ctaPrimary: "WhatsApp'tan Yazın",
+    ctaPrimary: "Telegram'dan Yazın",
     ctaSecondary: "Mağazaları Gör",
-    whatsappMessage: "Merhaba, orijinal marka ürünleri satın almak için yardım istiyorum.",
-    trustIndicators: ["Orijinallik garantisi", "WhatsApp'tan hızlı yanıt", "Güvenli teslimat"],
+    trustIndicators: ["Orijinallik garantisi", "Telegram'dan hızlı yanıt", "Güvenli teslimat"],
   },
   trust: {
     title: "ShopeMoon ile Alışveriş Adımları",
@@ -465,7 +457,7 @@ const turkishDictionary = {
     intro: "ShopeMoon ile alışveriş deneyiminizi bizimle paylaşın; bir fotoğraf, yorumunuz ve memnuniyetinizi gönderdiğinizde bir sonraki alışverişiniz için puan veya indirim kazanırsınız.",
     fields: {
       name: "Ad Soyad",
-      whatsapp: "WhatsApp Numarası",
+      phone: "Telefon Numarası",
       product: "Satın aldığınız marka veya ürün",
       rating: "Alışverişinizi 1'den 5'e kadar puanlayın",
       feedback: "Yorumunuz veya alışveriş deneyiminiz",
@@ -473,7 +465,7 @@ const turkishDictionary = {
     },
     submit: "Deneyimimi Gönder",
     moderationNote: "Yorumlar, ShopeMoon ekibi tarafından incelendikten sonra yayınlanacaktır.",
-    rewardNote: "Deneyiminizi gönderdiğinizde, bir sonraki alışverişiniz için indirim kodu WhatsApp üzerinden size gönderilir.",
+    rewardNote: "Deneyiminizi gönderdiğinizde, bir sonraki alışverişiniz için indirim kodu size gönderilir.",
     teaserTitle: "🎁 ShopeMoon Deneyiminiz",
     teaserDesc:
       "Alışverişinizden memnun kaldıysanız,\nbir fotoğraf, yorumunuz ve deneyiminizi göndererek\nbir sonraki siparişiniz için indirim kodu veya ödül puanı kazanın.",
@@ -493,7 +485,7 @@ const turkishDictionary = {
     desc: "ShopeMoon'a üye olarak satın alma taleplerinizi, favori markalarınızı ve iletişim bilgilerinizi kaydedebilir, ihtiyaç anında daha hızlı yardım alabilirsiniz.",
     fields: {
       name: "Ad Soyad",
-      whatsapp: "WhatsApp Numarası",
+      phone: "Telefon Numarası",
       brands: "Favori Markalar",
       details: "Detaylar / Satın Alma Talebi",
       address: "Adres",
@@ -505,12 +497,12 @@ const turkishDictionary = {
       birthDatePlaceholder: "Doğum tarihinizi girin",
       birthDateInvalidError: "Girilen doğum tarihi geçerli değil.",
       birthDateFutureError: "Doğum tarihi gelecekte olamaz.",
-      whatsappInvalidError: "Girilen WhatsApp numarası geçerli değil.",
+      phoneInvalidError: "Girilen telefon numarası geçerli değil.",
     },
     submit: "Gönder ve Üye Ol",
     submitting: "Gönderiliyor...",
-    successMessage: "Üyeliğiniz başarıyla alındı 🌙\nİlk alışverişinize özel %10 indirim kodunuz WhatsApp üzerinden gönderilecek.",
-    errorMessage: "Form gönderilirken bir sorun oluştu. Lütfen tekrar deneyin ya da WhatsApp üzerinden bizimle iletişime geçin.",
+    successMessage: "Üyeliğiniz başarıyla alındı 🌙\nİlk alışverişinize özel %10 indirim kodunuz size gönderilecek.",
+    errorMessage: "Form gönderilirken bir sorun oluştu. Lütfen tekrar deneyin ya da Telegram üzerinden bizimle iletişime geçin.",
   },
   membershipModal: {
     teaserTitle: "ShopeMoon'a Üye Ol 🎁",
@@ -525,13 +517,13 @@ const turkishDictionary = {
       { q: "Ürünler orijinal mi?", a: "Evet, tüm satın almalar doğrudan resmi marka mağazalarından yapılır." },
       { q: "Kargo ücreti ne kadar?", a: "Kargo ücreti hedefe ve ağırlığa göre değişir, ödeme öncesi bildirilir." },
       { q: "Teslimat ne kadar sürer?", a: "Teslimat süresi çıkış ve varış noktasına göre değişir, sipariş onayında bildirilir." },
-      { q: "Nasıl sipariş verebilirim?", a: "WhatsApp üzerinden bize bir bağlantı, fotoğraf veya ürün adı göndermeniz yeterlidir." },
+      { q: "Nasıl sipariş verebilirim?", a: "Telegram üzerinden bize bir bağlantı, fotoğraf veya ürün adı göndermeniz yeterlidir." },
     ],
   },
   contact: {
     title: "Bize Ulaşın",
-    desc: "Sorularınız veya sipariş vermek için WhatsApp üzerinden bize ulaşın.",
-    cta: "WhatsApp'ta Sohbete Başla",
+    desc: "Sorularınız veya sipariş vermek için Telegram üzerinden bize ulaşın.",
+    cta: "Telegram'da Sohbete Başla",
   },
   footer: {
     tagline: "Orijinal Türk ve Avrupa markalarından güvenli alışveriş",

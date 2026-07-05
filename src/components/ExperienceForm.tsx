@@ -2,13 +2,12 @@
 
 import { useState, type FormEvent } from "react";
 import { useLocale } from "@/context/providers";
-import { whatsappLink, type LocaleDictionary } from "@/lib/dictionary";
 
 const RATINGS = [1, 2, 3, 4, 5];
 
 export interface ExperiencePayload {
   name: string;
-  whatsapp: string;
+  phone: string;
   product: string;
   rating: number;
   feedback: string;
@@ -17,21 +16,19 @@ export interface ExperiencePayload {
 
 /**
  * Single integration point for submitting an experience.
- * Today this only opens a pre-filled WhatsApp message. Once a real backend
- * exists, replace the body of this function (e.g. POST `payload` to an API
- * route) — the form UI above never needs to change.
+ * POSTs to the API route, which notifies the ShopeMoon Telegram chat.
+ * Best-effort: a failed request never blocks the form's own success flow.
  */
-async function submitExperience(payload: ExperiencePayload, dict: LocaleDictionary) {
-  const message = [
-    dict.experience.teaserTitle,
-    `${dict.experience.fields.name}: ${payload.name}`,
-    `${dict.experience.fields.whatsapp}: ${payload.whatsapp}`,
-    `${dict.experience.fields.product}: ${payload.product}`,
-    `${dict.experience.fields.rating}: ${payload.rating}/5`,
-    `${dict.experience.fields.feedback}: ${payload.feedback || "-"}`,
-    `${dict.experience.fields.photo}: ${payload.photoName || "-"}`,
-  ].join("\n");
-  window.open(whatsappLink(message), "_blank", "noopener");
+async function submitExperience(payload: ExperiencePayload) {
+  try {
+    await fetch("/api/experience", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    // best-effort notification only — ignore network failures here
+  }
 }
 
 function StarIcon({ filled }: { filled: boolean }) {
@@ -57,7 +54,7 @@ export function ExperienceForm({ onSubmitted }: { onSubmitted?: () => void }) {
   const { dict } = useLocale();
   const [form, setForm] = useState({
     name: "",
-    whatsapp: "",
+    phone: "",
     product: "",
     rating: 5,
     feedback: "",
@@ -69,7 +66,7 @@ export function ExperienceForm({ onSubmitted }: { onSubmitted?: () => void }) {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await submitExperience({ ...form, photoName }, dict);
+      await submitExperience({ ...form, photoName });
       onSubmitted?.();
     } finally {
       setSubmitting(false);
@@ -95,15 +92,15 @@ export function ExperienceForm({ onSubmitted }: { onSubmitted?: () => void }) {
       </div>
 
       <div className="grid gap-2">
-        <label htmlFor="exp-whatsapp" className="text-sm font-semibold">
-          {dict.experience.fields.whatsapp}
+        <label htmlFor="exp-phone" className="text-sm font-semibold">
+          {dict.experience.fields.phone}
         </label>
         <input
-          id="exp-whatsapp"
+          id="exp-phone"
           type="tel"
           required
-          value={form.whatsapp}
-          onChange={(e) => setForm((f) => ({ ...f, whatsapp: e.target.value }))}
+          value={form.phone}
+          onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
           className={inputClass}
         />
       </div>

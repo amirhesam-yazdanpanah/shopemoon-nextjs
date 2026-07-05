@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useLocale } from "@/context/providers";
-import { isValidDateString, isFutureDate, isValidWhatsAppNumber } from "@/lib/validation";
+import { isValidDateString, isFutureDate, isValidPhoneNumber } from "@/lib/validation";
 
 type SubmitStatus = "idle" | "success" | "error";
 
@@ -19,7 +19,7 @@ const initialForm = {
 export function Membership() {
   const { dict } = useLocale();
   const [form, setForm] = useState(initialForm);
-  const [whatsappError, setWhatsappError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [birthDateError, setBirthDateError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<SubmitStatus>("idle");
@@ -28,11 +28,11 @@ export function Membership() {
     e.preventDefault();
     if (submitting) return;
 
-    if (!isValidWhatsAppNumber(form.whatsapp)) {
-      setWhatsappError(dict.membership.fields.whatsappInvalidError);
+    if (!isValidPhoneNumber(form.whatsapp)) {
+      setPhoneError(dict.membership.fields.phoneInvalidError);
       return;
     }
-    setWhatsappError("");
+    setPhoneError("");
 
     if (form.birthDate) {
       if (!isValidDateString(form.birthDate)) {
@@ -52,7 +52,7 @@ export function Membership() {
       const response = await fetch("/api/membership", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, source: "Membership Section" }),
       });
       if (!response.ok) throw new Error("Membership submission failed");
       setStatus("success");
@@ -93,25 +93,25 @@ export function Membership() {
           </div>
 
           <div className="grid gap-2">
-            <label htmlFor="whatsapp" className="text-sm font-semibold">
-              {dict.membership.fields.whatsapp}
+            <label htmlFor="phone" className="text-sm font-semibold">
+              {dict.membership.fields.phone}
             </label>
             <input
-              id="whatsapp"
+              id="phone"
               type="tel"
               required
               value={form.whatsapp}
               onChange={(e) => {
-                setWhatsappError("");
+                setPhoneError("");
                 setForm((f) => ({ ...f, whatsapp: e.target.value }));
               }}
-              aria-invalid={Boolean(whatsappError)}
-              aria-describedby={whatsappError ? "whatsapp-error" : undefined}
+              aria-invalid={Boolean(phoneError)}
+              aria-describedby={phoneError ? "phone-error" : undefined}
               className={inputClass}
             />
-            {whatsappError ? (
-              <p id="whatsapp-error" className="text-xs font-semibold text-red-600">
-                {whatsappError}
+            {phoneError ? (
+              <p id="phone-error" className="text-xs font-semibold text-red-600">
+                {phoneError}
               </p>
             ) : null}
           </div>

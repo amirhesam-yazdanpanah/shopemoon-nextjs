@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useLocale } from "@/context/providers";
-import { whatsappLink } from "@/lib/dictionary";
+import { telegramChannelLink } from "@/lib/dictionary";
 
 export function Hero() {
   const { dict } = useLocale();
@@ -47,7 +47,7 @@ export function Hero() {
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
             <a
-              href={whatsappLink(dict.hero.whatsappMessage)}
+              href={telegramChannelLink}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full bg-gradient-to-br from-gold to-gold-light px-10 py-4 text-base font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-lg"

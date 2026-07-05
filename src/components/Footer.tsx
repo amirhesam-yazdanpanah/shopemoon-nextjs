@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocale } from "@/context/providers";
+import { telegramChannelLink } from "@/lib/dictionary";
 
 export function Footer() {
   const { dict } = useLocale();
@@ -15,9 +16,8 @@ export function Footer() {
   ];
 
   const socialLinks = [
-    { href: "https://wa.me/989109798803", label: "WhatsApp" },
     { href: "https://www.instagram.com/shopemoon.tr/", label: "Instagram" },
-    { href: "https://t.me/shopeemonn", label: "Telegram" },
+    { href: telegramChannelLink, label: "Telegram" },
   ];
 
   return (
@@ -59,13 +59,13 @@ export function Footer() {
           </p>
           <div className="mt-4 flex flex-col items-center gap-2 text-sm opacity-90 sm:items-start">
             <a
-              href="https://wa.me/989109798803"
+              href={telegramChannelLink}
               target="_blank"
               rel="noopener noreferrer"
               dir="ltr"
               className="transition hover:text-gold-soft hover:opacity-100"
             >
-              +98 910 979 8803
+              @shopeemonn
             </a>
           </div>
         </div>

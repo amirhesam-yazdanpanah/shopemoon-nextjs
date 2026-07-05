@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState, type FormEvent } from "react";
 import { useConversation } from "@elevenlabs/react";
 import { useExperienceModal } from "@/context/providers";
-import { whatsappLink } from "@/lib/dictionary";
+import { telegramChannelLink } from "@/lib/dictionary";
 
 const AGENT_ID = "agent_1301kvzjfw9xed4vt4t83qd5md2k";
 
@@ -87,9 +87,9 @@ export function VoiceWidget() {
       openExperienceModal();
       return "Experience popup opened.";
     },
-    open_whatsapp: async () => {
-      window.open(whatsappLink(TEXT.pillLabel), "_blank", "noopener");
-      return "WhatsApp opened.";
+    open_telegram: async () => {
+      window.open(telegramChannelLink, "_blank", "noopener");
+      return "Telegram opened.";
     },
   };
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useLocale } from "@/context/providers";
-import { isValidDateString, isFutureDate, isValidWhatsAppNumber } from "@/lib/validation";
+import { isValidDateString, isFutureDate, isValidPhoneNumber } from "@/lib/validation";
 
 type SubmitStatus = "idle" | "success" | "error";
 
@@ -19,7 +19,7 @@ const initialForm = {
 export function MembershipPopupForm({ onSubmitted }: { onSubmitted?: () => void }) {
   const { dict } = useLocale();
   const [form, setForm] = useState(initialForm);
-  const [whatsappError, setWhatsappError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [birthDateError, setBirthDateError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<SubmitStatus>("idle");
@@ -36,11 +36,11 @@ export function MembershipPopupForm({ onSubmitted }: { onSubmitted?: () => void 
     e.preventDefault();
     if (submitting) return;
 
-    if (!isValidWhatsAppNumber(form.whatsapp)) {
-      setWhatsappError(dict.membership.fields.whatsappInvalidError);
+    if (!isValidPhoneNumber(form.whatsapp)) {
+      setPhoneError(dict.membership.fields.phoneInvalidError);
       return;
     }
-    setWhatsappError("");
+    setPhoneError("");
 
     if (form.birthDate) {
       if (!isValidDateString(form.birthDate)) {
@@ -60,7 +60,7 @@ export function MembershipPopupForm({ onSubmitted }: { onSubmitted?: () => void 
       const response = await fetch("/api/membership", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, brands: "", details: "" }),
+        body: JSON.stringify({ ...form, brands: "", details: "", source: "Membership Popup" }),
       });
       if (!response.ok) throw new Error("Membership submission failed");
       setStatus("success");
@@ -97,25 +97,25 @@ export function MembershipPopupForm({ onSubmitted }: { onSubmitted?: () => void 
       </div>
 
       <div className="grid gap-2">
-        <label htmlFor="popup-whatsapp" className="text-sm font-semibold">
-          {dict.membership.fields.whatsapp}
+        <label htmlFor="popup-phone" className="text-sm font-semibold">
+          {dict.membership.fields.phone}
         </label>
         <input
-          id="popup-whatsapp"
+          id="popup-phone"
           type="tel"
           required
           value={form.whatsapp}
           onChange={(e) => {
-            setWhatsappError("");
+            setPhoneError("");
             setForm((f) => ({ ...f, whatsapp: e.target.value }));
           }}
-          aria-invalid={Boolean(whatsappError)}
-          aria-describedby={whatsappError ? "popup-whatsapp-error" : undefined}
+          aria-invalid={Boolean(phoneError)}
+          aria-describedby={phoneError ? "popup-phone-error" : undefined}
           className={inputClass}
         />
-        {whatsappError ? (
-          <p id="popup-whatsapp-error" className="text-xs font-semibold text-red-600">
-            {whatsappError}
+        {phoneError ? (
+          <p id="popup-phone-error" className="text-xs font-semibold text-red-600">
+            {phoneError}
           </p>
         ) : null}
       </div>

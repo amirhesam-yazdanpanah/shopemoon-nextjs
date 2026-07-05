@@ -10,7 +10,7 @@ export function isFutureDate(value: string) {
   return date.getTime() > today.getTime();
 }
 
-export function isValidWhatsAppNumber(value: string) {
+export function isValidPhoneNumber(value: string) {
   if (!/^[\d\s+()-]+$/.test(value)) return false;
   const digits = value.replace(/\D/g, "");
   return digits.length >= 8 && digits.length <= 15;

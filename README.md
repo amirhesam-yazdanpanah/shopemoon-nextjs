@@ -13,13 +13,13 @@ Modern luxury fashion landing page for ShopeMoon. Built with Next.js 15 (App Rou
 
 - Persian (RTL) / English (LTR) toggle
 - Light / dark mode toggle
-- Hero section with WhatsApp CTA
+- Hero section with Telegram CTA
 - Trust badges
 - Product showcase by category
-- Membership form (submits via WhatsApp deep link)
+- Membership form (saved via API, with a Telegram admin notification)
+- Experience/review form (notifies the team via Telegram)
 - FAQ accordion
 - Contact section
-- Floating WhatsApp button
 
 ## Getting started
 
@@ -29,6 +29,15 @@ npm run dev
 ```
 
 Open http://localhost:3000
+
+## Environment variables
+
+- `MEMBERSHIP_WEBHOOK_URL` — n8n webhook that saves membership submissions to Google Sheets.
+- `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` — Telegram bot used to notify the team about new
+  membership signups and experience submissions. Optional in development (missing values are
+  logged as a warning and the notification is skipped, never crashing the app).
+
+See `.env.example` for details.
 
 ## Build
 
@@ -43,7 +52,8 @@ npm run start
 - Root Directory: **/** (repo root)
 - Build Command: `next build` (default)
 - Output Directory: *(default, managed by Next.js)*
+- Required environment variables: `MEMBERSHIP_WEBHOOK_URL`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`
 
 ## Contact
 
-WhatsApp: https://wa.me/989109798803
+Telegram: https://t.me/shopeemonn

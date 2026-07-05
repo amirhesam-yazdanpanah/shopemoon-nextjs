@@ -67,26 +67,6 @@ export function Header() {
         </svg>
       ),
     },
-    {
-      href: "https://wa.me/989109798803",
-      label: "WhatsApp",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M12 3a8.9 8.9 0 0 0-7.6 13.5L3 21l4.6-1.2A8.9 8.9 0 1 0 12 3Z"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M8.5 8.4c.3-.6.6-.6.9-.6h.6c.2 0 .4 0 .6.5.2.5.7 1.7.8 1.8.1.1.1.3 0 .5-.1.2-.2.3-.3.4-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.9.3.1.5.2.5.3 0 .2 0 .9-.3 1.6-.3.7-1.5 1.3-2.1 1.4-.5.1-1.2.1-2-.2-.4-.2-1-.4-1.7-.7-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3 0-1.4.7-2.1 1-2.4Z"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
-    },
   ];
 
   return (
