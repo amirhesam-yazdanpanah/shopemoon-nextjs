@@ -1,9 +1,10 @@
 "use client";
 
 import { useLocale } from "@/context/providers";
+import { getBrandDisplayName } from "@/lib/dictionary";
 
 export function ProductShowcase() {
-  const { dict } = useLocale();
+  const { dict, locale } = useLocale();
 
   return (
     <section id="products" className="px-5 py-20">
@@ -29,7 +30,7 @@ export function ProductShowcase() {
                       rel="noopener noreferrer"
                       className="block rounded-lg bg-cream-dark px-3 py-2 font-medium text-navy transition hover:bg-gold-soft hover:text-navy dark:bg-navy-dark dark:text-cream dark:hover:bg-navy-soft"
                     >
-                      {brand.name}
+                      {getBrandDisplayName(brand, locale)}
                     </a>
                   </li>
                 ))}
