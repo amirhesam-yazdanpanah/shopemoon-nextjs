@@ -54,7 +54,7 @@ export const fashionBrands: BrandLink[] = [
 ];
 
 export const sportsBrands: BrandLink[] = [
-  { name: "Nike", url: "https://www.nike.com", nameFa: "نایکی" },
+  { name: "Nike", url: "https://www.barcin.com/", nameFa: "نایکی" },
   { name: "Adidas", url: "https://www.adidas.com", nameFa: "آدیداس" },
   { name: "Puma", url: "https://www.puma.com", nameFa: "پوما" },
   { name: "Reebok", url: "https://www.reebok.com", nameFa: "ریباک" },
