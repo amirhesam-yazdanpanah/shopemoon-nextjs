@@ -238,6 +238,13 @@ export interface LocaleDictionary {
     submitting: string;
     successMessage: string;
     errorMessage: string;
+    successModal: {
+      title: string;
+      codeIntro: string;
+      copyButton: string;
+      copiedButton: string;
+      closeButton: string;
+    };
   };
   membershipModal: {
     teaserTitle: string;
@@ -385,6 +392,13 @@ const translatedDictionary = {
       submitting: "در حال ارسال...",
       successMessage: "عضویت شما با موفقیت ثبت شد 🌙\nکد تخفیف ۱۰٪ اولین خرید به‌زودی برای شما ارسال می‌شود.",
       errorMessage: "ارسال فرم با مشکل مواجه شد. لطفاً دوباره تلاش کنید یا از طریق تلگرام با ما در ارتباط باشید.",
+      successModal: {
+        title: "عضویت شما با موفقیت ثبت شد 🌙",
+        codeIntro: "کد تخفیف ۱۰٪ اولین خرید شما:",
+        copyButton: "کپی کد تخفیف",
+        copiedButton: "کپی شد ✓",
+        closeButton: "بستن",
+      },
     },
     membershipModal: {
       teaserTitle: "عضو شاپمون شو 🎁",
@@ -523,6 +537,13 @@ const translatedDictionary = {
       submitting: "Sending...",
       successMessage: "Your membership was submitted successfully 🌙\nYour 10% first-purchase discount code will be sent to you soon.",
       errorMessage: "Something went wrong sending the form. Please try again or reach us on Telegram.",
+      successModal: {
+        title: "Your membership was successfully registered 🌙",
+        codeIntro: "Your 10% first-purchase discount code:",
+        copyButton: "Copy Discount Code",
+        copiedButton: "Copied ✓",
+        closeButton: "Close",
+      },
     },
     membershipModal: {
       teaserTitle: "Join ShopeMoon 🎁",
@@ -663,6 +684,13 @@ const turkishDictionary = {
     submitting: "Gönderiliyor...",
     successMessage: "Üyeliğiniz başarıyla alındı 🌙\nİlk alışverişinize özel %10 indirim kodunuz size gönderilecek.",
     errorMessage: "Form gönderilirken bir sorun oluştu. Lütfen tekrar deneyin ya da Telegram üzerinden bizimle iletişime geçin.",
+    successModal: {
+      title: "Üyeliğiniz başarıyla tamamlandı 🌙",
+      codeIntro: "İlk alışverişinize özel %10 indirim kodunuz:",
+      copyButton: "İndirim Kodunu Kopyala",
+      copiedButton: "Kopyalandı ✓",
+      closeButton: "Kapat",
+    },
   },
   membershipModal: {
     teaserTitle: "ShopeMoon'a Üye Ol 🎁",

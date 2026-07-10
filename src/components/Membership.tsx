@@ -3,8 +3,14 @@
 import { useState, type FormEvent } from "react";
 import { useLocale } from "@/context/providers";
 import { isValidDateString, isFutureDate, isValidPhoneNumber } from "@/lib/validation";
+import { MembershipSuccessModal } from "./MembershipSuccessModal";
 
-type SubmitStatus = "idle" | "success" | "error";
+type SubmitStatus = "idle" | "error";
+
+interface MembershipApiResponse {
+  success: boolean;
+  discountCode?: string;
+}
 
 const initialForm = {
   name: "",
@@ -23,6 +29,7 @@ export function Membership() {
   const [birthDateError, setBirthDateError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [discountCode, setDiscountCode] = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -55,8 +62,10 @@ export function Membership() {
         body: JSON.stringify({ ...form, source: "Membership Section" }),
       });
       if (!response.ok) throw new Error("Membership submission failed");
-      setStatus("success");
+      const result: MembershipApiResponse = await response.json();
+      if (!result.discountCode) throw new Error("Membership submission failed");
       setForm(initialForm);
+      setDiscountCode(result.discountCode);
     } catch {
       setStatus("error");
     } finally {
@@ -208,11 +217,6 @@ export function Membership() {
             {submitting ? dict.membership.submitting : dict.membership.submit}
           </button>
 
-          {status === "success" ? (
-            <p className="whitespace-pre-line text-center text-sm font-semibold text-gold" role="status">
-              {dict.membership.successMessage}
-            </p>
-          ) : null}
           {status === "error" ? (
             <p className="text-center text-sm font-semibold text-red-600" role="alert">
               {dict.membership.errorMessage}
@@ -220,6 +224,10 @@ export function Membership() {
           ) : null}
         </form>
       </div>
+
+      {discountCode ? (
+        <MembershipSuccessModal discountCode={discountCode} onClose={() => setDiscountCode(null)} />
+      ) : null}
     </section>
   );
 }
