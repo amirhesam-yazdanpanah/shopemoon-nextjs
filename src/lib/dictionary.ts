@@ -34,6 +34,18 @@ export const fashionBrands: BrandLink[] = [
   { name: "Celine", url: "https://www.celine.com" },
   { name: "Hermès", url: "https://www.hermes.com" },
   { name: "Chanel", url: "https://www.chanel.com" },
+  // Contemporary & Department Stores
+  { name: "Guess", url: "https://www.guess.com" },
+  { name: "Tommy Hilfiger", url: "https://www.tommy.com" },
+  { name: "Calvin Klein", url: "https://www.calvinklein.com" },
+  { name: "GAP", url: "https://www.gap.com" },
+  { name: "Marks & Spencer", url: "https://www.marksandspencer.com" },
+  { name: "Boyner", url: "https://www.boyner.com.tr" },
+  { name: "Trendyol", url: "https://www.trendyol.com" },
+  // Footwear
+  { name: "Ecco", url: "https://www.ecco.com" },
+  { name: "Aldo", url: "https://www.aldoshoes.com" },
+  { name: "Birkenstock", url: "https://www.birkenstock.com" },
 ];
 
 export const sportsBrands: BrandLink[] = [
