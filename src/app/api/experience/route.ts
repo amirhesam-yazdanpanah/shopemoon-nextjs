@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { escapeTelegramHtml, sendTelegramMessage } from "@/lib/telegram";
 
-const PRODUCTION_WEBHOOK_URL = "https://amirhesam.app.n8n.cloud/webhook/shopemoon-experience";
+const PRODUCTION_WEBHOOK_URL = "https://amirhesam.app.n8n.cloud/webhook/shopemoon-experience-v2";
 
 interface ExperiencePayload {
   name: string;
@@ -10,6 +10,7 @@ interface ExperiencePayload {
   rating: number;
   feedback: string;
   photoName?: string;
+  photoBase64?: string;
 }
 
 interface CouponWebhookResponse {

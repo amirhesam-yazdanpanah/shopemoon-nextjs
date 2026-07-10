@@ -13,6 +13,7 @@ export interface ExperiencePayload {
   rating: number;
   feedback: string;
   photoName: string;
+  photoBase64?: string;
 }
 
 interface SubmitResult {
@@ -153,6 +154,7 @@ export function ExperienceForm() {
     feedback: "",
   });
   const [photoName, setPhotoName] = useState("");
+  const [photoBase64, setPhotoBase64] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
   const [coupon, setCoupon] = useState<{ code: string } | null>(null);
@@ -170,7 +172,7 @@ export function ExperienceForm() {
     setSubmitting(true);
     setSubmitError(false);
     try {
-      const result = await submitExperience({ ...form, photoName });
+      const result = await submitExperience({ ...form, photoName, photoBase64 });
       if (result.success && result.couponCode) {
         setCoupon({ code: result.couponCode });
       } else {
@@ -281,7 +283,18 @@ export function ExperienceForm() {
           id="exp-photo"
           type="file"
           accept="image/*"
-          onChange={(e) => setPhotoName(e.target.files?.[0]?.name ?? "")}
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (!file) {
+              setPhotoName("");
+              setPhotoBase64("");
+              return;
+            }
+            setPhotoName(file.name);
+            const reader = new FileReader();
+            reader.onload = () => setPhotoBase64(typeof reader.result === "string" ? reader.result : "");
+            reader.readAsDataURL(file);
+          }}
           className="rounded-lg border border-gold-soft/60 bg-white px-4 py-3 text-sm outline-none transition file:me-3 file:rounded-full file:border-0 file:bg-gold-soft file:px-4 file:py-2 file:text-xs file:font-bold file:text-gold focus:border-gold focus:ring-2 focus:ring-gold-soft dark:bg-navy-soft/40"
         />
       </div>
