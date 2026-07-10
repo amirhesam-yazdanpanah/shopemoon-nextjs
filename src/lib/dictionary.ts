@@ -230,6 +230,9 @@ export interface LocaleDictionary {
       birthDateInvalidError: string;
       birthDateFutureError: string;
       phoneInvalidError: string;
+      phoneHelperText: string;
+      phoneEnglishDigitsError: string;
+      phoneDuplicateError: string;
     };
     submit: string;
     submitting: string;
@@ -242,6 +245,11 @@ export interface LocaleDictionary {
     submit: string;
     teaserLater: string;
     successMessage: string;
+    successTitle: string;
+    successCodeIntro: string;
+    successCodeNote: string;
+    copyCode: string;
+    copiedToast: string;
   };
   experience: {
     title: string;
@@ -260,6 +268,12 @@ export interface LocaleDictionary {
     teaserTitle: string;
     teaserDesc: string;
     teaserLater: string;
+    successTitle: string;
+    successDesc: string;
+    couponValidity: string;
+    copyCode: string;
+    copiedToast: string;
+    submitError: string;
   };
   faq: {
     title: string;
@@ -323,12 +337,18 @@ const translatedDictionary = {
         feedback: "متن رضایت یا تجربه خرید",
         photo: "آپلود عکس رضایت / محصول",
       },
-      submit: "ثبت تجربه خرید",
+      submit: "ثبت و دریافت کد تخفیف",
       moderationNote: "نظرات پس از بررسی تیم شاپمون منتشر خواهند شد.",
       rewardNote: "با ارسال تجربه خرید، کد تخفیف خرید بعدی برای شما ارسال می‌شود.",
-      teaserTitle: "🎁 تجربه خرید با شاپمون",
-      teaserDesc: "اگر از خریدت راضی بودی،\nبا ارسال عکس، نظر و تجربه خریدت،\nبرای خرید بعدی کد تخفیف یا امتیاز هدیه دریافت کن.",
+      teaserTitle: "🎁 برای خرید بعدی ۵ درصد تخفیف بگیر",
+      teaserDesc: "نظر و رضایتت برامون خیلی ارزشمنده ❤️\n\nلطفاً چند دقیقه وقت بگذار و تجربه خریدت را با ما به اشتراک بگذار.\n\nبعد از ثبت فرم، کد تخفیف اختصاصی ۵ درصدی خرید بعدی به صورت خودکار به شما نمایش داده می‌شود.",
       teaserLater: "بعداً",
+      successTitle: "✅ کد تخفیف شما آماده است!",
+      successDesc: "کد تخفیف ۵ درصدی ویژه خرید بعدی شما:",
+      couponValidity: "این کد تا ۳۰ روز اعتبار دارد.",
+      copyCode: "کپی کد",
+      copiedToast: "کد تخفیف کپی شد.",
+      submitError: "ارسال فرم با مشکل مواجه شد. لطفاً دوباره تلاش کنید یا از طریق تلگرام با ما در ارتباط باشید.",
     },
     products: {
       title: "دسته‌بندی محصولات",
@@ -357,6 +377,9 @@ const translatedDictionary = {
         birthDateInvalidError: "تاریخ تولد وارد شده معتبر نیست.",
         birthDateFutureError: "تاریخ تولد نمی‌تواند در آینده باشد.",
         phoneInvalidError: "شماره تلفن وارد شده معتبر نیست.",
+        phoneHelperText: "اعداد را با کیبورد انگلیسی وارد کنید",
+        phoneEnglishDigitsError: "شماره تلفن را فقط با اعداد انگلیسی وارد کنید.",
+        phoneDuplicateError: "این شماره تلفن قبلاً در شاپمون ثبت شده است.",
       },
       submit: "ارسال و عضویت",
       submitting: "در حال ارسال...",
@@ -369,6 +392,11 @@ const translatedDictionary = {
       submit: "ثبت عضویت",
       teaserLater: "بعداً",
       successMessage: "عضویت شما با موفقیت ثبت شد. کد تخفیف اولین خرید برای شما ارسال می‌شود.",
+      successTitle: "عضویت شما با موفقیت انجام شد!",
+      successCodeIntro: "کد تخفیف ۱۰ درصدی اولین خرید شما:",
+      successCodeNote: "این کد فقط یک‌بار قابل استفاده است.",
+      copyCode: "کپی کد تخفیف",
+      copiedToast: "کد تخفیف کپی شد.",
     },
     faq: {
       title: "سوالات متداول",
@@ -446,13 +474,19 @@ const translatedDictionary = {
         feedback: "Your feedback or shopping experience",
         photo: "Upload a satisfaction / product photo",
       },
-      submit: "Submit My Experience",
+      submit: "Submit & Get My Discount Code",
       moderationNote: "Reviews will be published after the ShopeMoon team reviews them.",
       rewardNote: "After submitting your experience, your next-purchase discount code will be sent to you.",
-      teaserTitle: "🎁 Your ShopeMoon Experience",
+      teaserTitle: "🎁 Get 5% Off Your Next Purchase",
       teaserDesc:
-        "If you were happy with your purchase,\nsend a photo, your feedback, and your experience\nto get a discount code or reward points on your next order.",
+        "Your feedback and satisfaction mean a lot to us ❤️\n\nPlease take a few minutes to share your shopping experience with us.\n\nOnce you submit the form, your exclusive 5% discount code for your next purchase will be shown to you automatically.",
       teaserLater: "Later",
+      successTitle: "✅ Your discount code is ready!",
+      successDesc: "Your exclusive 5% discount code for your next purchase:",
+      couponValidity: "This code is valid for 30 days.",
+      copyCode: "Copy Code",
+      copiedToast: "Discount code copied.",
+      submitError: "Something went wrong submitting the form. Please try again or reach us on Telegram.",
     },
     products: {
       title: "Product Categories",
@@ -481,6 +515,9 @@ const translatedDictionary = {
         birthDateInvalidError: "The date of birth entered is not valid.",
         birthDateFutureError: "Date of birth cannot be in the future.",
         phoneInvalidError: "The phone number entered is not valid.",
+        phoneHelperText: "Enter digits using an English keyboard",
+        phoneEnglishDigitsError: "Please enter the phone number using English digits only.",
+        phoneDuplicateError: "This phone number is already registered with ShopeMoon.",
       },
       submit: "Submit & Join",
       submitting: "Sending...",
@@ -493,6 +530,11 @@ const translatedDictionary = {
       submit: "Join Now",
       teaserLater: "Later",
       successMessage: "Your membership was submitted successfully. Your first-purchase discount code will be sent to you.",
+      successTitle: "Your membership was successful!",
+      successCodeIntro: "Your 10% discount code for your first purchase:",
+      successCodeNote: "This code can only be used once.",
+      copyCode: "Copy Discount Code",
+      copiedToast: "Discount code copied.",
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -572,13 +614,19 @@ const turkishDictionary = {
       feedback: "Yorumunuz veya alışveriş deneyiminiz",
       photo: "Memnuniyet / ürün fotoğrafı yükleyin",
     },
-    submit: "Deneyimimi Gönder",
+    submit: "Gönder ve İndirim Kodumu Al",
     moderationNote: "Yorumlar, ShopeMoon ekibi tarafından incelendikten sonra yayınlanacaktır.",
     rewardNote: "Deneyiminizi gönderdiğinizde, bir sonraki alışverişiniz için indirim kodu size gönderilir.",
-    teaserTitle: "🎁 ShopeMoon Deneyiminiz",
+    teaserTitle: "🎁 Sonraki Alışverişinize %5 İndirim Kazanın",
     teaserDesc:
-      "Alışverişinizden memnun kaldıysanız,\nbir fotoğraf, yorumunuz ve deneyiminizi göndererek\nbir sonraki siparişiniz için indirim kodu veya ödül puanı kazanın.",
+      "Görüşünüz ve memnuniyetiniz bizim için çok değerli ❤️\n\nLütfen birkaç dakikanızı ayırarak alışveriş deneyiminizi bizimle paylaşın.\n\nFormu gönderdikten sonra, bir sonraki alışverişiniz için özel %5 indirim kodunuz otomatik olarak size gösterilecektir.",
     teaserLater: "Sonra",
+    successTitle: "✅ İndirim kodunuz hazır!",
+    successDesc: "Bir sonraki alışverişiniz için özel %5 indirim kodunuz:",
+    couponValidity: "Bu kod 30 gün boyunca geçerlidir.",
+    copyCode: "Kodu Kopyala",
+    copiedToast: "İndirim kodu kopyalandı.",
+    submitError: "Form gönderilirken bir sorun oluştu. Lütfen tekrar deneyin veya Telegram üzerinden bize ulaşın.",
   },
   products: {
     title: "Ürün Kategorileri",
@@ -607,6 +655,9 @@ const turkishDictionary = {
       birthDateInvalidError: "Girilen doğum tarihi geçerli değil.",
       birthDateFutureError: "Doğum tarihi gelecekte olamaz.",
       phoneInvalidError: "Girilen telefon numarası geçerli değil.",
+      phoneHelperText: "Rakamları İngilizce klavyeyle girin",
+      phoneEnglishDigitsError: "Lütfen telefon numarasını yalnızca İngilizce rakamlarla girin.",
+      phoneDuplicateError: "Bu telefon numarası ShopeMoon'da zaten kayıtlı.",
     },
     submit: "Gönder ve Üye Ol",
     submitting: "Gönderiliyor...",
@@ -619,6 +670,11 @@ const turkishDictionary = {
     submit: "Üyeliği Tamamla",
     teaserLater: "Sonra",
     successMessage: "Üyeliğiniz başarıyla alındı. İlk alışveriş indirim kodunuz size gönderilecek.",
+    successTitle: "Üyeliğiniz başarıyla tamamlandı!",
+    successCodeIntro: "İlk alışverişiniz için %10 indirim kodunuz:",
+    successCodeNote: "Bu kod yalnızca bir kez kullanılabilir.",
+    copyCode: "İndirim Kodunu Kopyala",
+    copiedToast: "İndirim kodu kopyalandı.",
   },
   faq: {
     title: "Sıkça Sorulan Sorular",

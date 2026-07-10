@@ -111,7 +111,7 @@ export function ExperienceModal() {
         </div>
 
         <div className="mt-8">
-          <ExperienceForm onSubmitted={close} />
+          <ExperienceForm />
         </div>
 
         <div className="mt-4 text-center">

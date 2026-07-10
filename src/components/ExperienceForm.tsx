@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useLocale } from "@/context/providers";
 
 const RATINGS = [1, 2, 3, 4, 5];
+const TOAST_DURATION_MS = 2200;
 
 export interface ExperiencePayload {
   name: string;
@@ -14,20 +15,28 @@ export interface ExperiencePayload {
   photoName: string;
 }
 
+interface SubmitResult {
+  success: boolean;
+  couponCode?: string;
+  expiresAt?: string;
+}
+
 /**
  * Single integration point for submitting an experience.
- * POSTs to the API route, which notifies the ShopeMoon Telegram chat.
- * Best-effort: a failed request never blocks the form's own success flow.
+ * POSTs to the API route, which stores the submission + a freshly generated
+ * coupon code and notifies the ShopeMoon Telegram chat.
  */
-async function submitExperience(payload: ExperiencePayload) {
+async function submitExperience(payload: ExperiencePayload): Promise<SubmitResult> {
   try {
-    await fetch("/api/experience", {
+    const response = await fetch("/api/experience", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
+    if (!response.ok) return { success: false };
+    return await response.json();
   } catch {
-    // best-effort notification only — ignore network failures here
+    return { success: false };
   }
 }
 
@@ -50,7 +59,91 @@ function StarIcon({ filled }: { filled: boolean }) {
   );
 }
 
-export function ExperienceForm({ onSubmitted }: { onSubmitted?: () => void }) {
+function TagIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12.59 2.59a2 2 0 0 0-1.41-.59H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.41l8.71 8.71a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42l-8.71-8.7Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" />
+    </svg>
+  );
+}
+
+function ClipboardIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="8" y="8" width="13" height="13" rx="2" stroke="currentColor" strokeWidth="1.8" />
+      <path
+        d="M4 16a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
+function CouponSuccessCard({
+  couponCode,
+  onCopy,
+  toastVisible,
+}: {
+  couponCode: string;
+  onCopy: () => void;
+  toastVisible: boolean;
+}) {
+  const { dict } = useLocale();
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setRevealed(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  return (
+    <div
+      className={`relative mt-6 rounded-2xl border border-emerald-300/70 bg-emerald-50 p-6 text-center shadow-card transition-all duration-500 ease-out dark:border-emerald-700/40 dark:bg-emerald-950/30 ${
+        revealed ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+      }`}
+    >
+      <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400">
+        {dict.experience.successTitle}
+      </h3>
+      <p className="mt-2 text-sm text-navy-soft dark:text-cream-dark">{dict.experience.successDesc}</p>
+
+      <div className="mx-auto mt-4 w-fit rounded-xl border-2 border-gold bg-white px-8 py-4 shadow-soft dark:bg-navy-soft/50">
+        <span dir="ltr" className="text-2xl font-black tracking-[0.2em] text-gold">
+          {couponCode}
+        </span>
+      </div>
+
+      <p className="mt-3 text-xs text-navy-soft dark:text-cream-dark">{dict.experience.couponValidity}</p>
+
+      <button
+        type="button"
+        onClick={onCopy}
+        className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-gold to-gold-light px-5 py-2.5 text-sm font-bold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft"
+      >
+        <ClipboardIcon />
+        {dict.experience.copyCode}
+      </button>
+
+      <div
+        role="status"
+        className={`pointer-events-none absolute inset-x-0 -bottom-3 mx-auto w-fit translate-y-full rounded-full bg-navy px-4 py-1.5 text-xs font-semibold text-cream shadow-soft transition-all duration-200 dark:bg-cream dark:text-navy ${
+          toastVisible ? "opacity-100" : "translate-y-[calc(100%+8px)] opacity-0"
+        }`}
+      >
+        {dict.experience.copiedToast}
+      </div>
+    </div>
+  );
+}
+
+export function ExperienceForm() {
   const { dict } = useLocale();
   const [form, setForm] = useState({
     name: "",
@@ -61,15 +154,42 @@ export function ExperienceForm({ onSubmitted }: { onSubmitted?: () => void }) {
   });
   const [photoName, setPhotoName] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  const [coupon, setCoupon] = useState<{ code: string } | null>(null);
+  const [toastVisible, setToastVisible] = useState(false);
+  const toastTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
+    };
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
+    setSubmitError(false);
     try {
-      await submitExperience({ ...form, photoName });
-      onSubmitted?.();
+      const result = await submitExperience({ ...form, photoName });
+      if (result.success && result.couponCode) {
+        setCoupon({ code: result.couponCode });
+      } else {
+        setSubmitError(true);
+      }
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function handleCopy() {
+    if (!coupon) return;
+    try {
+      await navigator.clipboard.writeText(coupon.code);
+      setToastVisible(true);
+      if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
+      toastTimerRef.current = window.setTimeout(() => setToastVisible(false), TOAST_DURATION_MS);
+    } catch {
+      // clipboard access denied — silently ignore, code is still visible on screen
     }
   }
 
@@ -169,15 +289,26 @@ export function ExperienceForm({ onSubmitted }: { onSubmitted?: () => void }) {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-2 rounded-full bg-gradient-to-br from-gold to-gold-light px-8 py-4 text-base font-bold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft disabled:opacity-60"
+        className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-gold to-gold-light px-8 py-4 text-base font-bold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft disabled:opacity-60"
       >
+        <TagIcon />
         {dict.experience.submit}
       </button>
+
+      {submitError && (
+        <p className="text-center text-sm font-semibold text-red-600 dark:text-red-400">
+          {dict.experience.submitError}
+        </p>
+      )}
+
+      {coupon && <CouponSuccessCard couponCode={coupon.code} onCopy={handleCopy} toastVisible={toastVisible} />}
 
       <p className="text-center text-xs text-navy-soft dark:text-cream-dark">
         {dict.experience.moderationNote}
       </p>
-      <p className="text-center text-sm font-semibold text-gold">{dict.experience.rewardNote}</p>
+      {!coupon && (
+        <p className="text-center text-sm font-semibold text-gold">{dict.experience.rewardNote}</p>
+      )}
     </form>
   );
 }

@@ -101,7 +101,7 @@ export function MembershipModal() {
         </div>
 
         <div className="mt-8">
-          <MembershipPopupForm onSubmitted={close} />
+          <MembershipPopupForm />
         </div>
 
         <div className="mt-4 text-center">
