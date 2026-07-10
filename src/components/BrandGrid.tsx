@@ -5,6 +5,7 @@ import {
   sportsBrands,
   beautyBrands,
   getBrandDisplayName,
+  getStoreUrl,
   type BrandLink,
   type Locale,
 } from "@/lib/dictionary";
@@ -19,7 +20,7 @@ function BrandGridRow({ brands, locale }: { brands: BrandLink[]; locale: Locale 
       {brands.map((brand) => (
         <a
           key={brand.name}
-          href={brand.url}
+          href={getStoreUrl(brand, locale)}
           target="_blank"
           rel="noopener noreferrer"
           title="برو به فروشگاه رسمی"

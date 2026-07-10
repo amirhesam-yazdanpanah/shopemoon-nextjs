@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "@/context/providers";
-import { getBrandDisplayName } from "@/lib/dictionary";
+import { getBrandDisplayName, getStoreUrl } from "@/lib/dictionary";
 
 export function ProductShowcase() {
   const { dict, locale } = useLocale();
@@ -25,7 +25,7 @@ export function ProductShowcase() {
                 {cat.brands.map((brand) => (
                   <li key={brand.name}>
                     <a
-                      href={brand.url}
+                      href={getStoreUrl(brand, locale)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block rounded-lg bg-cream-dark px-3 py-2 font-medium text-navy transition hover:bg-gold-soft hover:text-navy dark:bg-navy-dark dark:text-cream dark:hover:bg-navy-soft"

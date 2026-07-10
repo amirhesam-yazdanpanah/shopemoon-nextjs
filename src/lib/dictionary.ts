@@ -2,92 +2,184 @@ export type Locale = "fa" | "en" | "tr";
 
 export const telegramChannelLink = "https://t.me/shopeemonn";
 
+export interface StoreUrls {
+  /** Official default/international URL. Always required. */
+  default: string;
+  /** Official Turkish-language URL, only set when verified to belong to the store itself. */
+  tr?: string;
+  /** Official English-language URL, only set when distinct from default. */
+  en?: string;
+  /** Official Persian-language URL, only set when verified to belong to the store itself. */
+  fa?: string;
+}
+
 export interface BrandLink {
   name: string;
-  url: string;
   nameFa?: string;
+  urls: StoreUrls;
 }
 
 export function getBrandDisplayName(brand: BrandLink, locale: Locale): string {
   return locale === "fa" && brand.nameFa ? brand.nameFa : brand.name;
 }
 
+/**
+ * Resolves the correct official store URL for the active site language.
+ * Priority: FA -> urls.fa || urls.tr || urls.default
+ *           TR -> urls.tr || urls.default
+ *           EN -> urls.en || urls.default
+ * Only ever returns URLs that were supplied on the store's own `urls` object —
+ * never a translated, proxied, or third-party mirror of the destination.
+ */
+export function getStoreUrl(store: BrandLink, currentLanguage: Locale): string {
+  const { urls } = store;
+  if (currentLanguage === "fa") {
+    return urls.fa || urls.tr || urls.default;
+  }
+  if (currentLanguage === "tr") {
+    return urls.tr || urls.default;
+  }
+  return urls.en || urls.default;
+}
+
 export const fashionBrands: BrandLink[] = [
   // Inditex
-  { name: "Zara", url: "https://www.zara.com", nameFa: "زارا" },
-  { name: "Massimo Dutti", url: "https://www.massimodutti.com", nameFa: "ماسیمو دوتی" },
-  { name: "Oysho", url: "https://www.oysho.com", nameFa: "اویشو" },
-  { name: "Bershka", url: "https://www.bershka.com", nameFa: "برشکا" },
-  { name: "Stradivarius", url: "https://www.stradivarius.com", nameFa: "استرادیواریوس" },
-  { name: "Pull&Bear", url: "https://www.pullandbear.com", nameFa: "پول اند بیر" },
-  { name: "Zara Home", url: "https://www.zarahome.com", nameFa: "زارا هوم" },
-  { name: "Mango", url: "https://shop.mango.com", nameFa: "مانگو" },
-  { name: "H&M", url: "https://www.hm.com", nameFa: "اچ اند ام" },
+  { name: "Zara", nameFa: "زارا", urls: { default: "https://www.zara.com", tr: "https://www.zara.com/tr/" } },
+  {
+    name: "Massimo Dutti",
+    nameFa: "ماسیمو دوتی",
+    urls: { default: "https://www.massimodutti.com", tr: "https://www.massimodutti.com/tr/" },
+  },
+  { name: "Oysho", nameFa: "اویشو", urls: { default: "https://www.oysho.com", tr: "https://www.oysho.com/tr/" } },
+  {
+    name: "Bershka",
+    nameFa: "برشکا",
+    urls: { default: "https://www.bershka.com", tr: "https://www.bershka.com/tr/" },
+  },
+  {
+    name: "Stradivarius",
+    nameFa: "استرادیواریوس",
+    urls: { default: "https://www.stradivarius.com", tr: "https://www.stradivarius.com/tr/" },
+  },
+  {
+    name: "Pull&Bear",
+    nameFa: "پول اند بیر",
+    urls: { default: "https://www.pullandbear.com", tr: "https://www.pullandbear.com/tr/" },
+  },
+  {
+    name: "Zara Home",
+    nameFa: "زارا هوم",
+    urls: { default: "https://www.zarahome.com", tr: "https://www.zarahome.com/tr/" },
+  },
+  { name: "Mango", nameFa: "مانگو", urls: { default: "https://shop.mango.com" } },
+  { name: "H&M", nameFa: "اچ اند ام", urls: { default: "https://www.hm.com", tr: "https://www2.hm.com/tr_tr/index.html" } },
   // Luxury
-  { name: "Gucci", url: "https://www.gucci.com", nameFa: "گوچی" },
-  { name: "Dior", url: "https://www.dior.com", nameFa: "دیور" },
-  { name: "Louis Vuitton", url: "https://www.louisvuitton.com", nameFa: "لویی ویتون" },
-  { name: "Saint Laurent", url: "https://www.ysl.com", nameFa: "سن لوران" },
-  { name: "Prada", url: "https://www.prada.com", nameFa: "پرادا" },
-  { name: "Balenciaga", url: "https://www.balenciaga.com", nameFa: "بالنسیاگا" },
-  { name: "Burberry", url: "https://www.burberry.com", nameFa: "بربری" },
-  { name: "Fendi", url: "https://www.fendi.com", nameFa: "فندی" },
-  { name: "Valentino", url: "https://www.valentino.com", nameFa: "والنتینو" },
-  { name: "Versace", url: "https://www.versace.com", nameFa: "ورساچه" },
-  { name: "Bottega Veneta", url: "https://www.bottegaveneta.com", nameFa: "بوتگا ونتا" },
-  { name: "Loewe", url: "https://www.loewe.com", nameFa: "لوئه" },
-  { name: "Celine", url: "https://www.celine.com", nameFa: "سلین" },
-  { name: "Hermès", url: "https://www.hermes.com", nameFa: "هرمس" },
-  { name: "Chanel", url: "https://www.chanel.com", nameFa: "شنل" },
+  { name: "Gucci", nameFa: "گوچی", urls: { default: "https://www.gucci.com" } },
+  { name: "Dior", nameFa: "دیور", urls: { default: "https://www.dior.com" } },
+  { name: "Louis Vuitton", nameFa: "لویی ویتون", urls: { default: "https://www.louisvuitton.com" } },
+  { name: "Saint Laurent", nameFa: "سن لوران", urls: { default: "https://www.ysl.com" } },
+  { name: "Prada", nameFa: "پرادا", urls: { default: "https://www.prada.com", tr: "https://www.prada.com/tr/tr.html" } },
+  { name: "Balenciaga", nameFa: "بالنسیاگا", urls: { default: "https://www.balenciaga.com" } },
+  { name: "Burberry", nameFa: "بربری", urls: { default: "https://www.burberry.com", tr: "https://tr.burberry.com/" } },
+  { name: "Fendi", nameFa: "فندی", urls: { default: "https://www.fendi.com" } },
+  { name: "Valentino", nameFa: "والنتینو", urls: { default: "https://www.valentino.com" } },
+  { name: "Versace", nameFa: "ورساچه", urls: { default: "https://www.versace.com" } },
+  { name: "Bottega Veneta", nameFa: "بوتگا ونتا", urls: { default: "https://www.bottegaveneta.com" } },
+  { name: "Loewe", nameFa: "لوئه", urls: { default: "https://www.loewe.com" } },
+  { name: "Celine", nameFa: "سلین", urls: { default: "https://www.celine.com" } },
+  { name: "Hermès", nameFa: "هرمس", urls: { default: "https://www.hermes.com" } },
+  { name: "Chanel", nameFa: "شنل", urls: { default: "https://www.chanel.com" } },
   // Contemporary & Department Stores
-  { name: "Guess", url: "https://www.guess.com", nameFa: "گس" },
-  { name: "Tommy Hilfiger", url: "https://www.tommy.com", nameFa: "تامی هیلفیگر" },
-  { name: "Calvin Klein", url: "https://www.calvinklein.com", nameFa: "کلوین کلاین" },
-  { name: "GAP", url: "https://www.gap.com", nameFa: "گپ" },
-  { name: "Marks & Spencer", url: "https://www.marksandspencer.com", nameFa: "مارکس اند اسپنسر" },
-  { name: "Boyner", url: "https://www.boyner.com.tr", nameFa: "بوینر" },
-  { name: "Trendyol", url: "https://www.trendyol.com", nameFa: "ترندیول" },
+  {
+    name: "Guess",
+    nameFa: "گس",
+    urls: { default: "https://www.guess.com", tr: "https://www.guess.eu/tr-tr/home" },
+  },
+  {
+    name: "Tommy Hilfiger",
+    nameFa: "تامی هیلفیگر",
+    urls: { default: "https://www.tommy.com", tr: "https://tr.tommy.com/" },
+  },
+  { name: "Calvin Klein", nameFa: "کلوین کلاین", urls: { default: "https://www.calvinklein.com" } },
+  { name: "GAP", nameFa: "گپ", urls: { default: "https://www.gap.com", tr: "https://gap.com.tr/" } },
+  {
+    name: "Marks & Spencer",
+    nameFa: "مارکس اند اسپنسر",
+    urls: { default: "https://www.marksandspencer.com", tr: "https://www.marksandspencer.com.tr/" },
+  },
+  {
+    name: "Boyner",
+    nameFa: "بوینر",
+    urls: { default: "https://www.boyner.com.tr", en: "https://www.boyner.com.tr/en" },
+  },
+  {
+    name: "Trendyol",
+    nameFa: "ترندیول",
+    urls: { default: "https://www.trendyol.com", en: "https://www.trendyol.com/en" },
+  },
   // Footwear
-  { name: "Ecco", url: "https://www.ecco.com", nameFa: "اکو" },
-  { name: "Aldo", url: "https://www.aldoshoes.com", nameFa: "آلدو" },
-  { name: "Birkenstock", url: "https://www.birkenstock.com", nameFa: "بیرکن‌استاک" },
+  { name: "Ecco", nameFa: "اکو", urls: { default: "https://www.ecco.com", tr: "https://tr.ecco.com/" } },
+  { name: "Aldo", nameFa: "آلدو", urls: { default: "https://www.aldoshoes.com" } },
+  { name: "Birkenstock", nameFa: "بیرکن‌استاک", urls: { default: "https://www.birkenstock.com" } },
 ];
 
 export const sportsBrands: BrandLink[] = [
-  { name: "Nike", url: "https://www.barcin.com/", nameFa: "نایکی" },
-  { name: "Adidas", url: "https://www.adidas.com", nameFa: "آدیداس" },
-  { name: "Puma", url: "https://www.puma.com", nameFa: "پوما" },
-  { name: "Reebok", url: "https://www.reebok.com", nameFa: "ریباک" },
-  { name: "Under Armour", url: "https://www.underarmour.com", nameFa: "آندر آرمور" },
-  { name: "Alo Yoga", url: "https://www.aloyoga.com", nameFa: "الو یوگا" },
-  { name: "Champion", url: "https://www.champion.com", nameFa: "چمپیون" },
-  { name: "Lululemon", url: "https://www.lululemon.com", nameFa: "لولولمون" },
-  { name: "New Balance", url: "https://www.newbalance.com", nameFa: "نیو بالانس" },
-  { name: "Asics", url: "https://www.asics.com", nameFa: "اسیکس" },
-  { name: "The North Face", url: "https://www.thenorthface.com", nameFa: "نورث فیس" },
-  { name: "Columbia", url: "https://www.columbia.com", nameFa: "کلمبیا" },
+  // Nike's destination was intentionally changed to a Turkish reseller (not nike.com);
+  // it is already TR-appropriate, so no separate tr/fa override is added.
+  { name: "Nike", nameFa: "نایکی", urls: { default: "https://www.barcin.com/" } },
+  { name: "Adidas", nameFa: "آدیداس", urls: { default: "https://www.adidas.com", tr: "https://www.adidas.com.tr/" } },
+  { name: "Puma", nameFa: "پوما", urls: { default: "https://www.puma.com", tr: "https://tr.puma.com/" } },
+  { name: "Reebok", nameFa: "ریباک", urls: { default: "https://www.reebok.com", tr: "https://www.reebok.com.tr/" } },
+  {
+    name: "Under Armour",
+    nameFa: "آندر آرمور",
+    urls: { default: "https://www.underarmour.com", tr: "https://www.underarmour.com.tr/" },
+  },
+  { name: "Alo Yoga", nameFa: "الو یوگا", urls: { default: "https://www.aloyoga.com" } },
+  { name: "Champion", nameFa: "چمپیون", urls: { default: "https://www.champion.com" } },
+  { name: "Lululemon", nameFa: "لولولمون", urls: { default: "https://www.lululemon.com" } },
+  {
+    name: "New Balance",
+    nameFa: "نیو بالانس",
+    urls: { default: "https://www.newbalance.com", tr: "https://www.newbalance.com.tr/" },
+  },
+  { name: "Asics", nameFa: "اسیکس", urls: { default: "https://www.asics.com", tr: "https://www.asics.com.tr/" } },
+  {
+    name: "The North Face",
+    nameFa: "نورث فیس",
+    urls: { default: "https://www.thenorthface.com", tr: "https://www.thenorthface.com.tr/" },
+  },
+  { name: "Columbia", nameFa: "کلمبیا", urls: { default: "https://www.columbia.com" } },
 ];
 
 export const beautyBrands: BrandLink[] = [
-  { name: "Sephora", url: "https://www.sephora.com", nameFa: "سفورا" },
-  { name: "Clinique", url: "https://www.clinique.com", nameFa: "کلینیک" },
-  { name: "MAC", url: "https://www.maccosmetics.com", nameFa: "مک" },
-  { name: "KIKO Milano", url: "https://www.kikocosmetics.com", nameFa: "کیکو میلانو" },
-  { name: "Guerlain", url: "https://www.guerlain.com", nameFa: "گرلن" },
-  { name: "Chanel Beauty", url: "https://www.chanel.com/us/beauty/", nameFa: "شنل بیوتی" },
-  { name: "YSL Beauty", url: "https://www.yslbeauty.com", nameFa: "ایو سن لوران بیوتی" },
-  { name: "Dior Beauty", url: "https://www.dior.com/en_us/beauty", nameFa: "دیور بیوتی" },
-  { name: "Armani Beauty", url: "https://www.armanibeauty.com", nameFa: "آرمانی بیوتی" },
-  { name: "Lancôme", url: "https://www.lancome.com", nameFa: "لانکوم" },
-  { name: "Estée Lauder", url: "https://www.esteelauder.com", nameFa: "استی لادر" },
-  { name: "Tom Ford Beauty", url: "https://www.tomford.com", nameFa: "تام فورد بیوتی" },
-  { name: "Charlotte Tilbury", url: "https://www.charlottetilbury.com", nameFa: "شارلوت تیلبری" },
-  { name: "Kérastase", url: "https://www.kerastase.com", nameFa: "کراستاس" },
-  { name: "NARS", url: "https://www.narscosmetics.com", nameFa: "نارس" },
-  { name: "Benefit", url: "https://www.benefitcosmetics.com", nameFa: "بنفیت" },
-  { name: "Rare Beauty", url: "https://www.rarebeauty.com", nameFa: "ریر بیوتی" },
-  { name: "Fenty Beauty", url: "https://www.fentybeauty.com", nameFa: "فنتی بیوتی" },
-  { name: "Huda Beauty", url: "https://www.hudabeauty.com", nameFa: "هدی بیوتی" },
+  { name: "Sephora", nameFa: "سفورا", urls: { default: "https://www.sephora.com", tr: "https://www.sephora.com.tr/" } },
+  { name: "Clinique", nameFa: "کلینیک", urls: { default: "https://www.clinique.com" } },
+  { name: "MAC", nameFa: "مک", urls: { default: "https://www.maccosmetics.com", tr: "https://www.maccosmetics.com.tr/" } },
+  { name: "KIKO Milano", nameFa: "کیکو میلانو", urls: { default: "https://www.kikocosmetics.com" } },
+  { name: "Guerlain", nameFa: "گرلن", urls: { default: "https://www.guerlain.com" } },
+  { name: "Chanel Beauty", nameFa: "شنل بیوتی", urls: { default: "https://www.chanel.com/us/beauty/" } },
+  { name: "YSL Beauty", nameFa: "ایو سن لوران بیوتی", urls: { default: "https://www.yslbeauty.com" } },
+  { name: "Dior Beauty", nameFa: "دیور بیوتی", urls: { default: "https://www.dior.com/en_us/beauty" } },
+  { name: "Armani Beauty", nameFa: "آرمانی بیوتی", urls: { default: "https://www.armanibeauty.com" } },
+  { name: "Lancôme", nameFa: "لانکوم", urls: { default: "https://www.lancome.com" } },
+  {
+    name: "Estée Lauder",
+    nameFa: "استی لادر",
+    urls: { default: "https://www.esteelauder.com", tr: "https://www.esteelauder.com.tr/" },
+  },
+  { name: "Tom Ford Beauty", nameFa: "تام فورد بیوتی", urls: { default: "https://www.tomford.com" } },
+  { name: "Charlotte Tilbury", nameFa: "شارلوت تیلبری", urls: { default: "https://www.charlottetilbury.com" } },
+  {
+    name: "Kérastase",
+    nameFa: "کراستاس",
+    urls: { default: "https://www.kerastase.com", tr: "https://www.kerastase.com.tr/" },
+  },
+  { name: "NARS", nameFa: "نارس", urls: { default: "https://www.narscosmetics.com" } },
+  { name: "Benefit", nameFa: "بنفیت", urls: { default: "https://www.benefitcosmetics.com" } },
+  { name: "Rare Beauty", nameFa: "ریر بیوتی", urls: { default: "https://www.rarebeauty.com" } },
+  { name: "Fenty Beauty", nameFa: "فنتی بیوتی", urls: { default: "https://www.fentybeauty.com" } },
+  { name: "Huda Beauty", nameFa: "هدی بیوتی", urls: { default: "https://www.hudabeauty.com" } },
 ];
 
 export const allBrands: BrandLink[] = [...fashionBrands, ...sportsBrands, ...beautyBrands];
