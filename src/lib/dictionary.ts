@@ -303,7 +303,7 @@ const translatedDictionary = {
         "اگر تصمیم بگیرید از طریق شاپمون خرید کنید، با یک فروشگاه بی‌نام‌ونشان طرف نیستید؛ با شخصی در ازمیر در ارتباطی که خرید تو را مثل خرید خودش پیگیری می‌کند.",
       ],
       stats: [
-        { value: "37,000+", label: "دنبال‌کننده" },
+        { value: "38,500+", label: "دنبال‌کننده" },
         { value: "7", label: "سال تجربه خرید آنلاین" },
         { value: "صدها", label: "مشتری راضی" },
       ],
@@ -420,14 +420,14 @@ const translatedDictionary = {
       title: "About Me",
       paragraphs: [
         "I am Mona and I live in Izmir, Turkey.",
-        "For more than 7 years, I have been working professionally in online shopping and sales. Today, I am supported by a community of more than 37,000 followers.",
+        "For more than 7 years, I have been working professionally in online shopping and sales. Today, I am supported by a community of more than 38,500 followers.",
         "I created ShopeMoon with one simple goal: to make shopping from original Turkish and international brands safe, transparent, and worry-free for Persian-speaking customers.",
         "Every day, I stay in touch with different stores and brands, and I know how important it is to find authentic products, check availability, confirm prices, and arrange secure delivery. That is why I try to handle every step of the shopping process with full transparency, from checking the product and sending photos and invoices to tracking the order and final delivery.",
         "Over the years, even in difficult situations, I have never stopped communicating with customers and responding to their questions. Customer trust is my most valuable asset, and hundreds of successful shopping experiences and satisfied customers are the result of this commitment.",
         "When you shop through ShopeMoon, you are not dealing with an anonymous store. You are in direct contact with someone in Izmir who follows your purchase as carefully as her own.",
       ],
       stats: [
-        { value: "37,000+", label: "followers" },
+        { value: "38,500+", label: "followers" },
         { value: "7", label: "years of online shopping experience" },
         { value: "Hundreds", label: "of satisfied customers" },
       ],
@@ -546,14 +546,14 @@ const turkishDictionary = {
     title: "Hakkımda",
     paragraphs: [
       "Ben Mona, Türkiye İzmir'de yaşıyorum.",
-      "7 yıldan fazla süredir online alışveriş ve satış alanında profesyonel olarak çalışıyorum. Bugün 37.000'den fazla takipçiden oluşan bir topluluk benimle birlikte.",
+      "7 yıldan fazla süredir online alışveriş ve satış alanında profesyonel olarak çalışıyorum. Bugün 38.500'den fazla takipçiden oluşan bir topluluk benimle birlikte.",
       "ShopeMoon'u basit bir amaçla kurdum: Türkiye'deki ve uluslararası orijinal markalardan alışverişi Farsça konuşan müşteriler için güvenli, şeffaf ve endişesiz hale getirmek.",
       "Her gün farklı mağazalar ve markalarla iletişim halindeyim. Orijinal ürün bulmanın, stok kontrolü yapmanın, fiyat doğrulamanın ve güvenli teslimat sağlamanın ne kadar önemli olduğunu çok iyi biliyorum. Bu yüzden ürün kontrolünden fotoğraf ve fatura gönderimine, sipariş takibinden son teslimata kadar tüm alışveriş sürecini tam şeffaflıkla yürütmeye çalışıyorum.",
       "Yıllar boyunca, zor zamanlarda bile müşterilerle iletişimi ve sorulara yanıt vermeyi hiç bırakmadım. Müşteri güveni benim en değerli sermayemdir. Yüzlerce başarılı alışveriş deneyimi ve memnun müşteri, bu bağlılığın sonucudur.",
       "ShopeMoon üzerinden alışveriş yaptığınızda isimsiz bir mağazayla değil, İzmir'de sizin alışverişinizi kendi alışverişi gibi takip eden biriyle iletişim kurarsınız.",
     ],
     stats: [
-      { value: "37.000+", label: "takipçi" },
+      { value: "38.500+", label: "takipçi" },
       { value: "7", label: "yıllık online alışveriş deneyimi" },
       { value: "Yüzlerce", label: "memnun müşteri" },
     ],
