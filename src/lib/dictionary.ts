@@ -2,6 +2,9 @@ export type Locale = "fa" | "en" | "tr";
 
 export const telegramChannelLink = "https://t.me/shopeemonn";
 
+export const whatsappNumber = "989109798803";
+export const whatsappChannelLink = `https://wa.me/${whatsappNumber}`;
+
 export interface StoreUrls {
   /** Official default/international URL. Always required. */
   default: string;
@@ -320,7 +323,7 @@ const translatedDictionary = {
       eyebrow: "ShopeMoon",
       title: "خرید مستقیم از برندهای اورجینال",
       subtitle: "خرید حضوری و آنلاین از فروشگاه‌های معتبر ترکیه و اروپا",
-      ctaPrimary: "پیام در تلگرام",
+      ctaPrimary: "پیام در واتس‌اپ",
       ctaSecondary: "مشاهده فروشگاه‌ها",
       trustIndicators: ["ضمانت اصالت کالا", "پاسخگویی سریع در تلگرام", "ارسال مطمئن"],
     },
@@ -464,7 +467,7 @@ const translatedDictionary = {
       eyebrow: "ShopeMoon",
       title: "Buy Direct From Original Brands",
       subtitle: "In-person and online shopping from trusted Turkish and European retailers",
-      ctaPrimary: "Message on Telegram",
+      ctaPrimary: "Message on WhatsApp",
       ctaSecondary: "View Stores",
       trustIndicators: ["Authenticity guaranteed", "Fast Telegram replies", "Reliable delivery"],
     },
@@ -611,7 +614,7 @@ const turkishDictionary = {
     eyebrow: "ShopeMoon",
     title: "Orijinal Markalardan Doğrudan Alışveriş",
     subtitle: "Güvenilir Türk ve Avrupa mağazalarından yüz yüze ve online alışveriş",
-    ctaPrimary: "Telegram'dan Yazın",
+    ctaPrimary: "WhatsApp'tan Mesaj Gönder",
     ctaSecondary: "Mağazaları Gör",
     trustIndicators: ["Orijinallik garantisi", "Telegram'dan hızlı yanıt", "Güvenli teslimat"],
   },
